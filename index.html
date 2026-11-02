@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <link rel="icon" type="png" href="icon.png" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pasker Smekindo - Cabang Blitar Ranting Doko</title>
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#beranda" class="brand-logo">
+        <img src="icon.png" alt="Pasker Smekindo Logo" class="nav-icon">
+        <span class="brand-text">Pasker <span class="neon-red-text">Smekindo</span></span>
+      </a>
+      
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#beranda" class="nav-item active">Beranda</a>
+        <a href="#filosofi" class="nav-item">Filosofi</a>
+        <a href="#arsip" class="nav-item">Arsip</a>
+        <a href="#jadwal" class="nav-item">Jadwal</a>
+        <a href="#kontak" class="nav-item">Kontak</a>
+        <a href="#kontak" class="btn-nav-join">Gabung Sekarang</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION / BERANDA -->
+  <section id="beranda" class="hero-section">
+    <div class="hero-glow-bg"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Pasker <span class="neon-blue-text">Smekindo</span></h1>
+      <p class="hero-subtitle">Cabang Blitar Ranting Doko</p>
+      
+      <div class="hero-actions">
+        <a href="#arsip" class="btn btn-neon-red">
+          <i class="fa-solid fa-images"></i> Lihat Arsip
+        </a>
+        <a href="#kontak" class="btn btn-neon-blue">
+          <i class="fa-solid fa-user-plus"></i> Gabung Sekarang
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILOSOFI SECTION -->
+  <section id="filosofi" class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Filosofi <span class="neon-red-text">Perguruan</span></h2>
+        <div class="line-glow"></div>
+      </div>
+
+      <div class="grid-cards">
+        <div class="card interactive-card">
+          <div class="card-icon icon-blue"><i class="fa-solid fa-people-roof"></i></div>
+          <h3>Kekeluargaan</h3>
+          <p>Mempererat ikatan persaudaraan tanpa membedakan latar belakang, tumbuh dan berjuang bersama sebagai satu keluarga besar.</p>
+        </div>
+
+        <div class="card interactive-card">
+          <div class="card-icon icon-red"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Kehormatan</h3>
+          <p>Menjaga martabat, integritas, serta nama baik diri dan perguruan di manapun berada dengan sikap kesatria.</p>
+        </div>
+
+        <div class="card interactive-card">
+          <div class="card-icon icon-blue"><i class="fa-solid fa-user-ninja"></i></div>
+          <h3>Disiplin</h3>
+          <p>Membentuk keteguhan sikap, kepatuhan pada aturan, serta ketepatan waktu dalam setiap tindakan dan latihan.</p>
+        </div>
+
+        <div class="card interactive-card">
+          <div class="card-icon icon-red"><i class="fa-solid fa-fist-raised"></i></div>
+          <h3>Bela Diri</h3>
+          <p>Penguasaan teknik fisik dan ketangkasan fisik yang bertujuan untuk perlindungan diri serta menjaga kebenaran.</p>
+        </div>
+
+        <div class="card interactive-card">
+          <div class="card-icon icon-blue"><i class="fa-solid fa-brain"></i></div>
+          <h3>Mental</h3>
+          <p>Membangun ketahanan jiwa yang tangguh, pantang menyerah, serta berani menghadapi tantangan dan tekanan hidup.</p>
+        </div>
+
+        <div class="card interactive-card">
+          <div class="card-icon icon-red"><i class="fa-solid fa-hands-praying"></i></div>
+          <h3>Kerohanian</h3>
+          <p>Landasan spiritual mendalam sebagai pemandu moral agar keahlian yang dimiliki selalu berada di jalan yang mulia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARSIP SECTION -->
+  <section id="arsip" class="section-padding bg-darker">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Arsip <span class="neon-blue-text">Galeri</span></h2>
+        <div class="line-glow"></div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item interactive-card">
+          <img src="foto1.jpg" alt="Arsip 1" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="gallery-item interactive-card">
+          <img src="foto2.jpg" alt="Arsip 2" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="gallery-item interactive-card">
+          <img src="foto3.jpg" alt="Arsip 3" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="gallery-item interactive-card">
+          <img src="foto4.jpg" alt="Arsip 4" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="gallery-item interactive-card">
+          <img src="foto5.jpg" alt="Arsip 5" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="gallery-item interactive-card">
+          <img src="foto6.jpg" alt="Arsip 6" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="gallery-item interactive-card">
+          <img src="foto7.jpg" alt="Arsip 7" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="gallery-item interactive-card">
+          <img src="foto8.jpg" alt="Arsip 8" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+        <div class="gallery-item interactive-card">
+          <img src="foto9.jpg" alt="Arsip 9" loading="lazy">
+          <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JADWAL SECTION -->
+  <section id="jadwal" class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Jadwal <span class="neon-red-text">Latihan</span></h2>
+        <div class="line-glow"></div>
+      </div>
+
+      <div class="schedule-grid">
+        <!-- Kolom Cyber Blue Neon -->
+        <div class="schedule-card cyber-blue-neon interactive-card">
+          <div class="schedule-day">Rabu</div>
+          <div class="schedule-time"><i class="fa-regular fa-clock"></i> 15:00 WIB</div>
+          <a href="https://maps.app.goo.gl/MzjXofa4p7YXkA8E7" target="_blank" rel="noopener noreferrer" class="schedule-location">
+            <i class="fa-solid fa-location-dot icon-blue"></i>
+            <span>SMKN 1 DOKO</span>
+          </a>
+        </div>
+
+        <!-- Kolom Cyber Red Neon -->
+        <div class="schedule-card cyber-red-neon interactive-card">
+          <div class="schedule-day">Minggu</div>
+          <div class="schedule-time"><i class="fa-regular fa-clock"></i> 14:00 WIB</div>
+          <a href="https://maps.app.goo.gl/MzjXofa4p7YXkA8E7" target="_blank" rel="noopener noreferrer" class="schedule-location">
+            <i class="fa-solid fa-location-dot icon-red"></i>
+            <span>SMKN 1 DOKO</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER / KONTAK SECTION -->
+  <footer id="kontak" class="footer-section">
+    <div class="container footer-content">
+      
+      <div class="section-header">
+        <h2 class="section-title">Hubungi <span class="neon-blue-text">Kami</span></h2>
+        <div class="line-glow"></div>
+      </div>
+
+      <div class="footer-info-grid">
+        <div class="info-item interactive-card">
+          <i class="fa-solid fa-map-location-dot info-icon icon-blue"></i>
+          <div>
+            <h4>Alamat</h4>
+            <p>JL. PAHLAWAN, Kec. Doko, Kab. Blitar, Prov. Jawa Timur</p>
+          </div>
+        </div>
+
+        <div class="info-item interactive-card">
+          <i class="fa-solid fa-phone info-icon icon-red"></i>
+          <div>
+            <h4>Telepon / WhatsApp</h4>
+            <p>08123456789</p>
+          </div>
+        </div>
+
+        <div class="info-item interactive-card">
+          <i class="fa-solid fa-envelope info-icon icon-blue"></i>
+          <div>
+            <h4>Email</h4>
+            <p>paskersmekindo@gmail.com</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOOGLE MAPS EMBED -->
+      <div class="map-container interactive-card">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.208638153406!2d12.345!3d-8.123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMDcnMjwar2.OCJTIDExMsKwMjAnNDQuOCJF!5e0!3m2!1sid!2sid!4v1650000000000!5m2!1sid!2sid" 
+          width="100%" 
+          height="300" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lokasi SMKN 1 Doko di Google Maps">
+        </iframe>
+        <div class="map-link-wrapper">
+          <a href="https://maps.app.goo.gl/MzjXofa4p7YXkA8E7" target="_blank" rel="noopener noreferrer" class="btn-map-direct">
+            <i class="fa-solid fa-map-pin"></i> Buka di Google Maps
+          </a>
+        </div>
+      </div>
+
+      <!-- ICON SOCIAL MEDIA LINKS (TIKTOK & INSTAGRAM) -->
+      <div class="social-links-icon-wrapper">
+        <a href="https://tiktok.com/www.pskrsmekindo/" target="_blank" rel="noopener noreferrer" class="social-icon-btn tiktok-icon-glow" aria-label="TikTok Pasker Smekindo">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="https://www.instagram.com/pasker_smekindo" target="_blank" rel="noopener noreferrer" class="social-icon-btn instagram-icon-glow" aria-label="Instagram Pasker Smekindo">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pasker Smekindo - Cabang Blitar Ranting Doko. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
