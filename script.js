@@ -75,4 +75,54 @@ document.addEventListener('DOMContentLoaded', () => {
   animatedElements.forEach(el => {
     revealObserver.observe(el);
   });
-});
+// 4. Custom Neon Cursor Effect (Desktop Only)
+  if (window.innerWidth > 992) {
+    // Buat elemen kursor via JS
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    const cursorDot = document.createElement('div');
+    cursorDot.classList.add('custom-cursor-dot');
+    
+    document.body.appendChild(cursor);
+    document.body.appendChild(cursorDot);
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
+    });
+
+    // Animasi pergerakan kursor yang mulus (smooth trailing)
+    function renderCursor() {
+      cursorX += (mouseX - cursorX) * 0.2;
+      cursorY += (mouseY - cursorY) * 0.2;
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+      requestAnimationFrame(renderCursor);
+    }
+    renderCursor();
+
+    // Efek hover membesar saat menyentuh tombol atau link
+    const interactiveElements = document.querySelectorAll('a, button, .interactive-card, .gallery-item');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+  }
+
+  // 5. Parallax Efek Halus pada Hero Background
+  const heroSection = document.querySelector('.hero-section');
+  const heroGlowBg = document.querySelector('.hero-glow-bg');
+
+  if (heroSection && heroGlowBg) {
+    window.addEventListener('scroll', () => {
+      let scrollY = window.pageYOffset;
+      if (scrollY <= heroSection.offsetHeight) {
+        heroGlowBg.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.3}px))`;
+      }
+    });
+  }
