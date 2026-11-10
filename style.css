@@ -583,4 +583,35 @@ body {
   .nav-links.active {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
+  /* --- SCROLL ANIMATION EFFECTS --- */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variasi arah animasi */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-active.reveal-left,
+.reveal-active.reveal-right {
+  opacity: 1;
+  transform: translateX(0);
+}
 }
