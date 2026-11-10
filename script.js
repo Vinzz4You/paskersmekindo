@@ -1,665 +1,127 @@
-/* --- RESET & COLOR PALETTE (BLUE: #111184 & RED: #FF272A) --- */
-:root {
-  --bg-main: #04060f;
-  --bg-card: #090d1f;
-  --bg-card-hover: #101633;
-  
-  --neon-blue: #2222ff;
-  --neon-blue-glow: rgba(34, 34, 255, 0.5);
-  --base-blue: #111184;
-  
-  --base-red: #FF272A;
-  --neon-red: #FF272A;
-  --neon-red-glow: rgba(255, 39, 42, 0.65);
-  
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
-  
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  font-family: var(--font-body);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.section-padding {
-  padding: 90px 0;
-}
-
-.bg-darker {
-  background-color: #020308;
-}
-
-/* --- TEXT HIGHLIGHTS --- */
-.neon-blue-text {
-  color: #4a4aff;
-  text-shadow: 0 0 12px var(--neon-blue-glow), 0 0 22px var(--neon-blue-glow);
-}
-
-.neon-red-text {
-  color: var(--neon-red);
-  text-shadow: 0 0 12px var(--neon-red-glow), 0 0 22px var(--neon-red-glow);
-}
-
-/* --- NAVBAR --- */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(4, 6, 15, 0.88);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 39, 42, 0.35);
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.brand-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-
-.nav-icon {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px var(--neon-blue-glow));
-}
-
-.brand-text {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 26px;
-}
-
-.nav-item {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-}
-
-.nav-item:hover, .nav-item.active {
-  color: #fff;
-  text-shadow: 0 0 10px var(--neon-blue-glow);
-}
-
-.btn-nav-join {
-  background: var(--base-red);
-  color: #fff;
-  padding: 9px 22px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.88rem;
-  box-shadow: 0 0 15px var(--neon-red-glow);
-  transition: all 0.3s ease;
-  border: 1px solid var(--base-red);
-}
-
-.btn-nav-join:hover {
-  background: #e01b1e;
-  box-shadow: 0 0 25px var(--neon-red-glow);
-  transform: translateY(-2px);
-}
-
-.mobile-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* --- HERO SECTION --- */
-.hero-section {
-  position: relative;
-  height: 90vh;
-  min-height: 550px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.hero-glow-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50vw;
-  height: 50vh;
-  background: radial-gradient(circle, rgba(17, 17, 132, 0.25) 0%, rgba(255, 39, 42, 0.2) 50%, transparent 70%);
-  filter: blur(70px);
-  z-index: 1;
-}
-
-.hero-content {
-  max-width: 800px;
-  z-index: 2;
-}
-
-.hero-title {
-  font-family: var(--font-heading);
-  font-size: 3.8rem;
-  font-weight: 800;
-  line-height: 1.15;
-  margin-bottom: 12px;
-  color: #fff;
-}
-
-.hero-subtitle {
-  font-size: 1.25rem;
-  color: var(--text-muted);
-  font-weight: 400;
-  margin-bottom: 35px;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 18px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 13px 30px;
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-}
-
-.btn-neon-red {
-  background: var(--base-red);
-  color: #fff;
-  border: 1px solid var(--base-red);
-  box-shadow: 0 0 18px var(--neon-red-glow);
-}
-
-.btn-neon-red:hover {
-  background: #e01b1e;
-  box-shadow: 0 0 28px rgba(255, 39, 42, 0.85);
-  transform: translateY(-2px);
-}
-
-.btn-neon-blue {
-  background: var(--base-blue);
-  color: #fff;
-  border: 1.5px solid #3333ff;
-  box-shadow: 0 0 15px rgba(17, 17, 132, 0.6);
-}
-
-.btn-neon-blue:hover {
-  background: #1b1bc4;
-  box-shadow: 0 0 25px var(--neon-blue-glow);
-  transform: translateY(-2px);
-}
-
-/* --- SECTION HEADERS --- */
-.section-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.section-title {
-  font-family: var(--font-heading);
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 12px;
-}
-
-.line-glow {
-  width: 70px;
-  height: 3.5px;
-  background: linear-gradient(90deg, var(--base-blue), var(--base-red));
-  margin: 0 auto;
-  border-radius: 2px;
-  box-shadow: 0 0 12px var(--neon-blue-glow);
-}
-
-/* --- INTERACTIVE CARDS (HOVER MERAH-BIRU SPLIT) --- */
-.interactive-card {
-  background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  transition: all 0.35s ease;
-}
-
-.interactive-card:hover, .interactive-card:active {
-  transform: translateY(-6px);
-  background-color: var(--bg-card-hover);
-  border-color: transparent;
-  box-shadow: -5px 5px 22px rgba(34, 34, 255, 0.4), 
-              5px -5px 22px var(--neon-red-glow);
-}
-
-/* --- FILOSOFI SECTION --- */
-.grid-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
-}
-
-.card {
-  padding: 32px 24px;
-}
-
-.card-icon {
-  font-size: 2rem;
-  margin-bottom: 18px;
-}
-
-.icon-blue {
-  color: #4a4aff;
-  filter: drop-shadow(0 0 8px var(--neon-blue-glow));
-}
-
-.icon-red {
-  color: var(--base-red);
-  filter: drop-shadow(0 0 8px var(--neon-red-glow));
-}
-
-.card h3 {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.card p {
-  color: var(--text-muted);
-  font-size: 0.92rem;
-}
-
-/* --- ARSIP GALERI --- */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.gallery-item {
-  height: 240px;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.gallery-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(4, 6, 15, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  font-size: 1.7rem;
-  color: #4a4aff;
-  filter: drop-shadow(0 0 10px var(--neon-blue-glow));
-}
-
-.gallery-item:hover img {
-  transform: scale(1.06);
-}
-
-.gallery-item:hover .gallery-overlay {
-  opacity: 1;
-}
-
-/* --- JADWAL SECTION --- */
-.schedule-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
-  max-width: 850px;
-  margin: 0 auto;
-}
-
-.schedule-card {
-  padding: 35px 25px;
-  text-align: center;
-}
-
-.cyber-blue-neon {
-  border: 1.5px solid var(--base-blue);
-  box-shadow: 0 0 15px rgba(17, 17, 132, 0.5);
-  background: linear-gradient(145deg, #090d1f, #0d1230);
-}
-
-.cyber-red-neon {
-  border: 1.5px solid var(--base-red);
-  box-shadow: 0 0 15px var(--neon-red-glow);
-  background: linear-gradient(145deg, #090d1f, #1a0808);
-}
-
-.schedule-day {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 8px;
-}
-
-.schedule-time {
-  font-size: 1.1rem;
-  color: #4a4aff;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-shadow: 0 0 8px var(--neon-blue-glow);
-}
-
-.cyber-red-neon .schedule-time {
-  color: var(--base-red);
-  text-shadow: 0 0 8px var(--neon-red-glow);
-}
-
-.schedule-location {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  color: #fff;
-  font-weight: 500;
-  border: 1px solid rgba(255, 39, 42, 0.4);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.schedule-location:hover {
-  background: rgba(255, 39, 42, 0.2);
-  border-color: var(--base-red);
-  transform: translateY(-2px);
-  box-shadow: 0 0 12px var(--neon-red-glow);
-}
-
-/* --- FOOTER / KONTAK & MAPS --- */
-.footer-section {
-  background-color: #020308;
-  padding: 60px 0 25px 0;
-  border-top: 1px solid rgba(255, 39, 42, 0.35);
-}
-
-.footer-info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 22px;
-}
-
-.info-icon {
-  font-size: 1.6rem;
-}
-
-.info-item h4 {
-  font-family: var(--font-heading);
-  color: #fff;
-  font-size: 0.95rem;
-  margin-bottom: 3px;
-}
-
-.info-item p {
-  color: var(--text-muted);
-  font-size: 0.88rem;
-}
-
-.map-container {
-  padding: 15px;
-  margin-bottom: 40px;
-  border: 1px solid rgba(255, 39, 42, 0.35);
-}
-
-.map-container iframe {
-  border-radius: 8px;
-  filter: brightness(0.9) contrast(1.1);
-}
-
-.map-link-wrapper {
-  text-align: center;
-  margin-top: 15px;
-}
-
-.btn-map-direct {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 39, 42, 0.15);
-  color: var(--base-red);
-  border: 1px solid var(--base-red);
-  padding: 8px 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 0.88rem;
-  font-weight: 600;
-  box-shadow: 0 0 10px var(--neon-red-glow);
-  transition: all 0.3s ease;
-}
-
-.btn-map-direct:hover {
-  background: var(--base-red);
-  color: #fff;
-  box-shadow: 0 0 18px var(--neon-red-glow);
-  transform: translateY(-2px);
-}
-
-/* --- ICON SOCIAL MEDIA BUTTONS --- */
-.social-links-icon-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.social-icon-btn {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: #fff;
-  background-color: var(--bg-card);
-  text-decoration: none;
-  transition: all 0.35s ease;
-}
-
-.tiktok-icon-glow {
-  border: 1.5px solid var(--base-red);
-  box-shadow: 0 0 12px var(--neon-red-glow);
-}
-
-.tiktok-icon-glow:hover {
-  background-color: var(--base-red);
-  box-shadow: 0 0 22px var(--neon-red-glow);
-  transform: translateY(-4px) scale(1.08);
-}
-
-.instagram-icon-glow {
-  border: 1.5px solid var(--base-blue);
-  box-shadow: 0 0 12px var(--neon-blue-glow);
-}
-
-.instagram-icon-glow:hover {
-  background-color: var(--base-blue);
-  box-shadow: 0 0 22px var(--neon-blue-glow);
-  transform: translateY(-4px) scale(1.08);
-}
-
-.footer-bottom {
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 25px;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
-
-/* --- SCROLL REVEAL & MODERN EFFECTS --- */
-.reveal-init {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Shimmer Light Effect on Cards & Buttons */
-.interactive-card, .btn-neon-red, .btn-neon-blue {
-  position: relative;
-  overflow: hidden;
-}
-
-.interactive-card::after, .btn-neon-red::after, .btn-neon-blue::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(60deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
-  transform: rotate(30deg) translateX(-100%);
-  transition: transform 0.7s ease-in-out;
-}
-
-.interactive-card:hover::after, .btn-neon-red:hover::after, .btn-neon-blue:hover::after {
-  transform: rotate(30deg) translateX(100%);
-}
-
-/* Custom Neon Cursor (Desktop Only) */
-@media (min-width: 992px) {
-  body {
-    cursor: default;
-  }
-  
-  .custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--neon-blue);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
-    z-index: 9999;
-    box-shadow: 0 0 10px var(--neon-blue-glow);
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Mobile Navigation Toggle Menu
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  if (mobileToggle && navLinks) {
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = mobileToggle.querySelector('i');
+      if (navLinks.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // Close menu on navigation click
+    document.querySelectorAll('.nav-item, .btn-nav-join').forEach(item => {
+      item.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = mobileToggle.querySelector('i');
+        if (icon) {
+          icon.classList.remove('fa-xmark');
+          icon.classList.add('fa-bars');
+        }
+      });
+    });
   }
 
-  .custom-cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 6px;
-    background-color: var(--base-red);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 10000;
-    box-shadow: 0 0 8px var(--neon-red-glow);
+  // 2. Highlight active nav item on scroll
+  const sections = document.querySelectorAll('section, footer');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navItems.forEach(item => {
+      item.classList.remove('active');
+      if (item.getAttribute('href') && item.getAttribute('href').includes(current)) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // 3. Scroll Reveal Animation (Animasi Muncul Saat Discroll)
+  const animatedElements = document.querySelectorAll(
+    '.section-header, .card, .gallery-item, .schedule-card, .info-item, .map-container'
+  );
+
+  animatedElements.forEach((el, index) => {
+    el.classList.add('reveal-init');
+    el.style.transitionDelay = `${(index % 3) * 0.15}s`;
+  });
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-active');
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+  });
+
+  animatedElements.forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // 4. Custom Neon Cursor Effect (Desktop Only)
+  if (window.innerWidth > 992) {
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    const cursorDot = document.createElement('div');
+    cursorDot.classList.add('custom-cursor-dot');
+    
+    document.body.appendChild(cursor);
+    document.body.appendChild(cursorDot);
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
+    });
+
+    function renderCursor() {
+      cursorX += (mouseX - cursorX) * 0.2;
+      cursorY += (mouseY - cursorY) * 0.2;
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+      requestAnimationFrame(renderCursor);
+    }
+    renderCursor();
+
+    const interactiveElements = document.querySelectorAll('a, button, .interactive-card, .gallery-item');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
   }
 
-  body.cursor-hover .custom-cursor {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(34, 34, 255, 0.1);
-    border-color: var(--base-red);
-    box-shadow: 0 0 15px var(--neon-red-glow);
-  }
-}
+  // 5. Parallax Effect Halus pada Hero Background
+  const heroSection = document.querySelector('.hero-section');
+  const heroGlowBg = document.querySelector('.hero-glow-bg');
 
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width: 768px) {
-  .hero-title { font-size: 2.5rem; }
-  .hero-subtitle { font-size: 1.05rem; }
-  
-  .mobile-toggle { display: block; }
-
-  .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: rgba(4, 6, 15, 0.96);
-    backdrop-filter: blur(15px);
-    flex-direction: column;
-    padding: 20px 0;
-    gap: 18px;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    transition: clip-path 0.35s ease-in-out;
+  if (heroSection && heroGlowBg) {
+    window.addEventListener('scroll', () => {
+      let scrollY = window.pageYOffset;
+      if (scrollY <= heroSection.offsetHeight) {
+        heroGlowBg.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.3}px))`;
+      }
+    });
   }
-
-  .nav-links.active {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-}
+});
