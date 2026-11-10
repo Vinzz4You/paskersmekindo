@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   animatedElements.forEach((el, index) => {
     el.classList.add('reveal-init');
-    // Beri jeda kemunculan bergantian (stagger) biar estetik
     el.style.transitionDelay = `${(index % 3) * 0.15}s`;
   });
 
@@ -125,32 +124,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  
-// --- EFEK KETIK PADA JUDUL PASKER SMEKINDO ---
-const heroTitle = document.querySelector('.hero-title');
 
-if (heroTitle) {
-  // Simpan teks asli
-  const textRed = "Smekindo";
-  let i = 0;
-
-  // Kosongkan dulu teks bagian merah untuk efek ngetik
-  heroTitle.innerHTML = `Pasker <span class="neon-blue-text">Smekindo</span>`; 
-  
-  // Efek ngetik huruf demi huruf pada kata "Smekindo"
-  const targetSpan = heroTitle.querySelector('.neon-blue-text');
-  if (targetSpan) {
-    targetSpan.textContent = '';
+  // 6. EFEK KETIK (TYPING EFFECT) PADA JUDUL HERO
+  const heroTitle = document.querySelector('.hero-title');
+  if (heroTitle) {
+    const textTarget = "Smekindo";
+    let index = 0;
     
-    function typeEffect() {
-      if (i < textRed.length) {
-        targetSpan.textContent += textRed.charAt(i);
-        i++;
-        setTimeout(typeEffect, 100); // Kecepatan ngetik (100ms per huruf)
+    heroTitle.innerHTML = `Pasker <span class="neon-blue-text"></span>`;
+    const targetSpan = heroTitle.querySelector('.neon-blue-text');
+
+    if (targetSpan) {
+      function typeWriter() {
+        if (index < textTarget.length) {
+          targetSpan.textContent += textTarget.charAt(index);
+          index++;
+          setTimeout(typeWriter, 120); // Kecepatan ngetik (120ms per huruf)
+        }
       }
+      setTimeout(typeWriter, 400); // Jeda sebelum mulai ngetik saat halaman dibuka
     }
-    
-    // Jalankan efek saat halaman selesai dimuat
-    setTimeout(typeEffect, 300);
   }
-}
+});
