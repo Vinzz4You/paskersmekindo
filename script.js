@@ -51,13 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Scroll Reveal Animation (Animasi Muncul Saat Discroll)
+  // 3. SCROLL REVEAL ANIMATION (Animasi Muncul Saat Discroll)
   const animatedElements = document.querySelectorAll(
     '.section-header, .card, .gallery-item, .schedule-card, .info-item, .map-container'
   );
 
   animatedElements.forEach((el, index) => {
     el.classList.add('reveal-init');
+    // Beri jeda kemunculan bergantian (stagger) biar estetik
     el.style.transitionDelay = `${(index % 3) * 0.15}s`;
   });
 
