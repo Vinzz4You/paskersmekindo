@@ -596,4 +596,74 @@ body {
   .nav-links.active {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
+/* --- 1. EFEK SHIMMER / KILATAN CAHAYA DI KARTU & TOMBOL --- */
+.interactive-card, .btn-neon-red, .btn-neon-blue {
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-card::after, .btn-neon-red::after, .btn-neon-blue::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+  transform: rotate(30deg) translateX(-100%);
+  transition: transform 0.7s ease-in-out;
+}
+
+.interactive-card:hover::after, .btn-neon-red:hover::after, .btn-neon-blue:hover::after {
+  transform: rotate(30deg) translateX(100%);
+}
+
+/* --- 2. CUSTOM CURSOR NEON (Hanya aktif di perangkat desktop/komputer) --- */
+@media (min-width: 992px) {
+  body {
+    cursor: default;
+  }
+  
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--neon-blue);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+    z-index: 9999;
+    box-shadow: 0 0 10px var(--neon-blue-glow);
+  }
+
+  .custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--base-red);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    box-shadow: 0 0 8px var(--neon-red-glow);
+  }
+
+  /* Efek membesar saat kursor diarahkan ke tombol/link */
+  body.cursor-hover .custom-cursor {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(34, 34, 255, 0.1);
+    border-color: var(--base-red);
+    box-shadow: 0 0 15px var(--neon-red-glow);
+  }
 }
