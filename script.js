@@ -125,4 +125,32 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-});
+  
+// --- EFEK KETIK PADA JUDUL PASKER SMEKINDO ---
+const heroTitle = document.querySelector('.hero-title');
+
+if (heroTitle) {
+  // Simpan teks asli
+  const textRed = "Smekindo";
+  let i = 0;
+
+  // Kosongkan dulu teks bagian merah untuk efek ngetik
+  heroTitle.innerHTML = `Pasker <span class="neon-blue-text">Smekindo</span>`; 
+  
+  // Efek ngetik huruf demi huruf pada kata "Smekindo"
+  const targetSpan = heroTitle.querySelector('.neon-blue-text');
+  if (targetSpan) {
+    targetSpan.textContent = '';
+    
+    function typeEffect() {
+      if (i < textRed.length) {
+        targetSpan.textContent += textRed.charAt(i);
+        i++;
+        setTimeout(typeEffect, 100); // Kecepatan ngetik (100ms per huruf)
+      }
+    }
+    
+    // Jalankan efek saat halaman selesai dimuat
+    setTimeout(typeEffect, 300);
+  }
+}
