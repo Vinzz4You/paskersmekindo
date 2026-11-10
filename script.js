@@ -52,14 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 3. Scroll Reveal Animation (Animasi Muncul Saat Discroll)
-  // Otomatis memilih elemen penting untuk diberi efek animasi
   const animatedElements = document.querySelectorAll(
     '.section-header, .card, .gallery-item, .schedule-card, .info-item, .map-container'
   );
 
   animatedElements.forEach((el, index) => {
     el.classList.add('reveal-init');
-    // Berikan sedikit jeda (stagger) berdasarkan urutan item agar munculnya estetik bergantian
     el.style.transitionDelay = `${(index % 3) * 0.15}s`;
   });
 
@@ -67,11 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('reveal-active');
-        // Opsional: observer.unobserve(entry.target); jika animasinya hanya ingin sekali saja diputar
       }
     });
   }, {
-    threshold: 0.15, // Animasi mulai jalan saat elemen masuk 15% ke dalam layar
+    threshold: 0.15,
     rootMargin: "0px 0px -50px 0px"
   });
 
