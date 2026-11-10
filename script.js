@@ -51,7 +51,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. SCROLL REVEAL ANIMATION (Animasi Muncul Saat Discroll)
+  // 3. EFEK KETIK (TYPING EFFECT) PADA KATA "SMEKINDO"
+  const targetSpan = document.querySelector('.typing-target');
+  if (targetSpan) {
+    const textTarget = "Smekindo";
+    let index = 0;
+    targetSpan.textContent = ""; // Kosongkan dulu untuk mulai mengetik
+
+    function typeWriter() {
+      if (index < textTarget.length) {
+        targetSpan.textContent += textTarget.charAt(index);
+        index++;
+        setTimeout(typeWriter, 120); // Kecepatan ketik (120ms per huruf)
+      }
+    }
+    setTimeout(typeWriter, 400); // Jeda sebelum mulai
+  }
+
+  // 4. SCROLL REVEAL ANIMATION (Animasi Muncul Saat Discroll)
   const animatedElements = document.querySelectorAll(
     '.section-header, .card, .gallery-item, .schedule-card, .info-item, .map-container'
   );
@@ -76,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealObserver.observe(el);
   });
 
-  // 4. Custom Neon Cursor Effect (Desktop Only)
+  // 5. Custom Neon Cursor Effect (Desktop Only)
   if (window.innerWidth > 992) {
     const cursor = document.createElement('div');
     cursor.classList.add('custom-cursor');
@@ -112,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Parallax Effect Halus pada Hero Background
+  // 6. Parallax Effect Halus pada Hero Background
   const heroSection = document.querySelector('.hero-section');
   const heroGlowBg = document.querySelector('.hero-glow-bg');
 
@@ -123,26 +140,5 @@ document.addEventListener('DOMContentLoaded', () => {
         heroGlowBg.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.3}px))`;
       }
     });
-  }
-
-  // 6. EFEK KETIK (TYPING EFFECT) PADA JUDUL HERO
-  const heroTitle = document.querySelector('.hero-title');
-  if (heroTitle) {
-    const textTarget = "Smekindo";
-    let index = 0;
-    
-    heroTitle.innerHTML = `Pasker <span class="neon-blue-text"></span>`;
-    const targetSpan = heroTitle.querySelector('.neon-blue-text');
-
-    if (targetSpan) {
-      function typeWriter() {
-        if (index < textTarget.length) {
-          targetSpan.textContent += textTarget.charAt(index);
-          index++;
-          setTimeout(typeWriter, 120); // Kecepatan ngetik (120ms per huruf)
-        }
-      }
-      setTimeout(typeWriter, 400); // Jeda sebelum mulai ngetik saat halaman dibuka
-    }
   }
 });
