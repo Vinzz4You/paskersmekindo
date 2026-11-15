@@ -121,6 +121,33 @@ body {
   text-shadow: 0 0 10px var(--neon-blue-glow);
 }
 
+/* --- TOMBOL AUTH DI NAVBAR (LOGIN & GABUNG) --- */
+.nav-auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-nav-login {
+  background: var(--base-blue);
+  color: #fff;
+  padding: 9px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1.5px solid #3333ff;
+  box-shadow: 0 0 12px rgba(17, 17, 132, 0.6);
+  transition: all 0.3s ease;
+}
+
+.btn-nav-login:hover {
+  background: #1b1bc4;
+  box-shadow: 0 0 22px var(--neon-blue-glow);
+  transform: translateY(-2px);
+}
+
 .btn-nav-join {
   background: var(--base-red);
   color: #fff;
@@ -559,7 +586,7 @@ body {
   font-size: 0.85rem;
 }
 
-/* --- SCROLL REVEAL & MODERN EFFECTS --- */
+/* --- SCROLL REVEAL ANIMATION EFFECTS --- */
 .reveal-init {
   opacity: 0;
   transform: translateY(40px);
@@ -572,13 +599,13 @@ body {
   transform: translateY(0);
 }
 
-/* Shimmer Light Effect on Cards & Buttons */
-.interactive-card, .btn-neon-red, .btn-neon-blue {
+/* --- SHIMMER LIGHT EFFECT ON CARDS & BUTTONS --- */
+.interactive-card, .btn-neon-red, .btn-neon-blue, .btn-nav-login, .btn-nav-join {
   position: relative;
   overflow: hidden;
 }
 
-.interactive-card::after, .btn-neon-red::after, .btn-neon-blue::after {
+.interactive-card::after, .btn-neon-red::after, .btn-neon-blue::after, .btn-nav-login::after, .btn-nav-join::after {
   content: '';
   position: absolute;
   top: -50%;
@@ -590,11 +617,11 @@ body {
   transition: transform 0.7s ease-in-out;
 }
 
-.interactive-card:hover::after, .btn-neon-red:hover::after, .btn-neon-blue:hover::after {
+.interactive-card:hover::after, .btn-neon-red:hover::after, .btn-neon-blue:hover::after, .btn-nav-login:hover::after, .btn-nav-join:hover::after {
   transform: rotate(30deg) translateX(100%);
 }
 
-/* Custom Neon Cursor (Desktop Only) */
+/* --- CUSTOM NEON CURSOR (DESKTOP ONLY) --- */
 @media (min-width: 992px) {
   body {
     cursor: default;
@@ -662,37 +689,7 @@ body {
   .nav-links.active {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
-}
 
-/* --- TOMBOL LOGIN DI NAVBAR --- */
-.nav-auth-buttons {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.btn-nav-login {
-  background: var(--base-blue);
-  color: #fff;
-  padding: 9px 22px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.88rem;
-  border: 1.5px solid #3333ff;
-  box-shadow: 0 0 12px rgba(17, 17, 132, 0.6);
-  transition: all 0.3s ease;
-}
-
-.btn-nav-login:hover {
-  background: #1b1bc4;
-  box-shadow: 0 0 22px var(--neon-blue-glow);
-  transform: translateY(-2px);
-}
-
-/* Responsif untuk menu HP */
-@media (max-width: 768px) {
   .nav-auth-buttons {
     flex-direction: column;
     width: 80%;
