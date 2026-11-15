@@ -9,41 +9,78 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Menggunakan style.css utama agar 100% sama -->
+  <!-- Menggunakan style.css utama agar desain 100% sama -->
   <link rel="stylesheet" href="style.css">
   
   <style>
-    /* Styling Tambahan Khusus Bagian Materi (Menyatu dengan tema index.html) */
-    .materi-hero {
-      position: relative;
-      padding: 140px 20px 60px 20px;
-      text-align: center;
-    }
-
-    .materi-section {
-      padding: 40px 0 90px 0;
+    /* Styling Khusus Tampilan Tab Materi */
+    .materi-dashboard-section {
+      min-height: 85vh;
+      padding: 120px 20px 60px 20px;
       position: relative;
       z-index: 2;
     }
 
-    .materi-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 35px;
-      max-width: 900px;
+    .dashboard-wrapper {
+      max-width: 850px;
       margin: 0 auto;
     }
 
-    .materi-card {
-      padding: 38px 32px;
-      scroll-margin-top: 100px; /* Supaya pas diklik dari navbar nggak ketutup header */
+    /* Navigasi Tab di Atas */
+    .materi-tabs-nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .tab-menu-btn {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 12px 10px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .tab-menu-btn:hover {
+      color: #fff;
+      border-color: #4a4aff;
+    }
+
+    .tab-menu-btn.active {
+      background: var(--base-blue);
+      color: #fff;
+      border-color: #3333ff;
+      box-shadow: 0 0 18px var(--neon-blue-glow);
+    }
+
+    /* Kotak Konten yang Berganti */
+    .tab-content-panel {
+      display: none;
+      padding: 40px 35px;
+      animation: fadeInPanel 0.4s ease forwards;
+    }
+
+    .tab-content-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeInPanel {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .materi-card-header {
       display: flex;
       align-items: center;
       gap: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding-bottom: 15px;
     }
@@ -59,7 +96,7 @@
       margin: 0;
     }
 
-    .materi-card p {
+    .tab-content-panel p {
       color: var(--text-main);
       font-size: 1rem;
       line-height: 1.8;
@@ -94,11 +131,11 @@
     .prasetya-title {
       font-family: var(--font-heading);
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--base-red);
       text-shadow: 0 0 10px var(--neon-red-glow);
       letter-spacing: 1px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .privacy-box {
@@ -122,11 +159,21 @@
       box-shadow: 0 0 28px rgba(37, 211, 102, 0.8);
       transform: translateY(-2px);
     }
+
+    /* Responsif HP */
+    @media (max-width: 768px) {
+      .materi-tabs-nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tab-content-panel {
+        padding: 25px 20px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR TETAP SAMA PERSIS DENGAN INDEX.HTML (4 NAVIGASI MATERI + TOMBOL KELUAR) -->
+  <!-- NAVBAR UTAMA DENGAN TOMBOL KELUAR -->
   <header class="navbar">
     <div class="nav-container">
       <a href="index.html" class="brand-logo">
@@ -134,97 +181,87 @@
         <span class="brand-text">Pasker <span class="neon-red-text">Smekindo</span></span>
       </a>
 
-      <button class="mobile-toggle" id="mobile-toggle">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-
-      <nav class="nav-links" id="nav-links">
-        <a href="#sejarah" class="nav-item active">Sejarah</a>
-        <a href="#panca-prasetya" class="nav-item">Panca Prasetya</a>
-        <a href="#tingkatan-sabuk" class="nav-item">Tingkatan Sabuk</a>
-        <a href="#materi-dasar" class="nav-item">Materi Dasar</a>
-        <div class="nav-auth-buttons">
-          <a href="index.html" class="btn-nav-join"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
-        </div>
-      </nav>
+      <div class="nav-auth-buttons">
+        <a href="index.html" class="btn-nav-join"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
+      </div>
     </div>
   </header>
 
-  <!-- HERO HEADER MATERI -->
-  <section class="materi-hero">
-    <div class="hero-glow-bg"></div>
-    <div class="hero-content" style="margin: 0 auto;">
-      <h1 class="hero-title" style="font-size: 2.8rem;">Materi <span class="neon-blue-text">Anggota</span></h1>
-      <p class="hero-subtitle">Portal Khusus Siswa & Warga Pasker Smekindo Cabang Blitar Ranting Doko</p>
-    </div>
-  </section>
+  <!-- BACKGROUND GLOW -->
+  <div class="hero-glow-bg"></div>
 
-  <!-- KONTEN UTAMA (DENGAN EFEK SCROLL REVEAL & INTERACTIVE CARD) -->
-  <section class="materi-section">
-    <div class="container">
-      <div class="materi-grid">
+  <!-- KONTEN UTAMA DASHBOARD MATERI -->
+  <section class="materi-dashboard-section">
+    <div class="dashboard-wrapper">
 
-        <!-- 1. SEJARAH IKS DIBENTUK -->
-        <div id="sejarah" class="card interactive-card materi-card">
-          <div class="materi-card-header">
-            <i class="fa-solid fa-landmark icon-blue"></i>
-            <h3>Sejarah IKS Dibentuk</h3>
-          </div>
-          <p><strong>IKSPI Kera Sakti (Ikatan Keluarga Silat Putra Indonesia Kera Sakti)</strong> didirikan pada 15 Januari 1980 di Madiun, Jawa Timur, oleh Raden Totong Kiemdarto.</p>
-          <ul class="materi-list">
-            <li><strong>Lokasi Awal:</strong> Berdiri di Jl. Merpati No. 45, Kelurahan Nambangan Lor, Kecamatan Mangunharjo, Madiun.</li>
-          </ul>
-        </div>
-
-        <!-- 2. PANCA PRASETYA -->
-        <div id="panca-prasetya" class="card interactive-card materi-card">
-          <div class="materi-card-header">
-            <i class="fa-solid fa-scroll icon-red"></i>
-            <h3>Panca Prasetya</h3>
-          </div>
-          <div class="prasetya-title">PANCA PRASETIA</div>
-          <p>Kami siswa siswi IKS.PI Kera Sakti berjanji :</p>
-          <ul class="materi-list">
-            <li>1. SETIA KEPADA PANCASILA DAN UNDANG UNDANG DASAR 1945</li>
-            <li>2. MENJUNJUNG TINGGI SERTA MENJAGA NAMA BAIK PERGURUAN DI DALAM MAUPUN DI LUAR LATIHAN</li>
-            <li>3. HORMAT DAN PATUH KEPADA GURU SERTA MENJALIN RASA PERSAUDARAAN SESAMA SAUDARA SEPERGURUAN</li>
-            <li>4. AKAN SELALU BERTINDAK JUJUR, DISIPLIN DAN PENUH TANGGUNG JAWAB</li>
-            <li>5. SANGGUP DENGAN PENUH KESADARAN MENJALANKAN SEMUA PERATURAN YANG BERLAKU DALAM PERGURUAN</li>
-          </ul>
-        </div>
-
-        <!-- 3. TINGKATAN SABUK -->
-        <div id="tingkatan-sabuk" class="card interactive-card materi-card">
-          <div class="materi-card-header">
-            <i class="fa-solid fa-award icon-blue"></i>
-            <h3>Tingkatan Sabuk</h3>
-          </div>
-          <ul class="materi-list">
-            <li><strong>Sabuk Biru</strong> (Warga Tingkat I)</li>
-            <li><strong>Sabuk Merah</strong> (Tingkat II / Pendekar)</li>
-            <li><strong>Sabuk Merah Setrip Emas</strong> (Tingkat III / Dewan Guru)</li>
-          </ul>
-        </div>
-
-        <!-- 4. MATERI DASAR -->
-        <div id="materi-dasar" class="card interactive-card materi-card">
-          <div class="materi-card-header">
-            <i class="fa-solid fa-shield-halved icon-red"></i>
-            <h3>Materi Dasar</h3>
-          </div>
-          <div class="privacy-box">
-            <p style="margin-bottom: 0;">Materi dasar ikspi kera sakti memiliki privasi yang tidak bisa di umbar dan sembarangan dijelaskan di sosial media, tanya ke pelatih langsung untuk mendapatkan materi dasar.</p>
-          </div>
-          <a href="https://wa.me/6285804304958?text=mas%20izin%20bertanya" target="_blank" class="btn btn-wa-pelatih">
-            <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i> Tanya Pelatih
-          </a>
-        </div>
-
+      <!-- 4 TOMBOL NAVIGASI TAB -->
+      <div class="materi-tabs-nav">
+        <button class="tab-menu-btn active" onclick="switchMateriTab(event, 'panel-sejarah')">Sejarah</button>
+        <button class="tab-menu-btn" onclick="switchMateriTab(event, 'panel-prasetya')">Panca Prasetya</button>
+        <button class="tab-menu-btn" onclick="switchMateriTab(event, 'panel-sabuk')">Tingkatan Sabuk</button>
+        <button class="tab-menu-btn" onclick="switchMateriTab(event, 'panel-dasar')">Materi Dasar</button>
       </div>
+
+      <!-- PANEL 1: SEJARAH IKS DIBENTUK -->
+      <div id="panel-sejarah" class="card interactive-card tab-content-panel active">
+        <div class="materi-card-header">
+          <i class="fa-solid fa-landmark icon-blue"></i>
+          <h3>Sejarah IKS Dibentuk</h3>
+        </div>
+        <p>IKSPI Kera Sakti (Ikatan Keluarga Silat Putra Indonesia Kera Sakti) didirikan pada 15 Januari 1980 di Madiun, Jawa Timur, oleh Raden Totong Kiemdarto.</p>
+        <ul class="materi-list">
+          <li><strong>Lokasi Awal:</strong> Berdiri di Jl. Merpati No. 45, Kelurahan Nambangan Lor, Kecamatan Mangunharjo, Madiun.</li>
+        </ul>
+      </div>
+
+      <!-- PANEL 2: PANCA PRASETYA -->
+      <div id="panel-prasetya" class="card interactive-card tab-content-panel">
+        <div class="materi-card-header">
+          <i class="fa-solid fa-scroll icon-red"></i>
+          <h3>Panca Prasetya</h3>
+        </div>
+        <div class="prasetya-title">PANCA PRASETIA</div>
+        <p>Kami siswa siswi IKS.PI Kera Sakti berjanji :</p>
+        <ul class="materi-list">
+          <li>1. SETIA KEPADA PANCASILA DAN UNDANG UNDANG DASAR 1945</li>
+          <li>2. MENJUNJUNG TINGGI SERTA MENJAGA NAMA BAIK PERGURUAN DI DALAM MAUPUN DI LUAR LATIHAN</li>
+          <li>3. HORMAT DAN PATUH KEPADA GURU SERTA MENJALIN RASA PERSAUDARAAN SESAMA SAUDARA SEPERGURUAN</li>
+          <li>4. AKAN SELALU BERTINDAK JUJUR, DISIPLIN DAN PENUH TANGGUNG JAWAB</li>
+          <li>5. SANGGUP DENGAN PENUH KESADARAN MENJALANKAN SEMUA PERATURAN YANG BERLAKU DALAM PERGURUAN</li>
+        </ul>
+      </div>
+
+      <!-- PANEL 3: TINGKATAN SABUK -->
+      <div id="panel-sabuk" class="card interactive-card tab-content-panel">
+        <div class="materi-card-header">
+          <i class="fa-solid fa-award icon-blue"></i>
+          <h3>Tingkatan Sabuk</h3>
+        </div>
+        <ul class="materi-list">
+          <li>Sabuk Biru (Warga Tingkat I)</li>
+          <li>Sabuk Merah (Tingkat II / Pendekar)</li>
+          <li>Sabuk Merah Setrip Emas (Tingkat III / Dewan Guru)</li>
+        </ul>
+      </div>
+
+      <!-- PANEL 4: MATERI DASAR -->
+      <div id="panel-dasar" class="card interactive-card tab-content-panel">
+        <div class="materi-card-header">
+          <i class="fa-solid fa-shield-halved icon-red"></i>
+          <h3>Materi Dasar</h3>
+        </div>
+        <div class="privacy-box">
+          <p style="margin-bottom: 0;">Materi dasar ikspi kera sakti memiliki privasi yang tidak bisa di umbar dan sembarangan dijelaskan di sosial media, tanya ke pelatih langsung untuk mendapatkan materi dasar</p>
+        </div>
+        <a href="https://wa.me/6285804304958?text=mas%20izin%20bertanya" target="_blank" class="btn btn-wa-pelatih">
+          <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i> Tanya Pelatih
+        </a>
+      </div>
+
     </div>
   </section>
 
-  <!-- FOOTER SAMA DENGAN INDEX.HTML -->
+  <!-- FOOTER -->
   <footer class="footer-section">
     <div class="container">
       <div class="footer-bottom" style="border-top: none; padding-top: 0;">
@@ -233,8 +270,23 @@
     </div>
   </footer>
 
-  <!-- MENGHUBUNGKAN SCRIPT.JS AGAR ANIMASI SCROLL & KURSOR NEON JALAN -->
+  <!-- SCRIPT UNTUK PINDAH TAB / PANEL KLIK -->
   <script src="script.js"></script>
+  <script>
+    function switchMateriTab(event, panelId) {
+      // Sembunyikan semua panel isi
+      const panels = document.querySelectorAll('.tab-content-panel');
+      panels.forEach(panel => panel.classList.remove('active'));
+
+      // Nonaktifkan semua tombol menu tab
+      const buttons = document.querySelectorAll('.tab-menu-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // Tampilkan panel yang diklik dan aktifkan tombolnya
+      document.getElementById(panelId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
