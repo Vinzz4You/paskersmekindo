@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi Anggota - Pasker Smekindo Blitar Doko</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Menggunakan style.css utama agar 100% sama -->
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Styling Tambahan Khusus Bagian Materi (Menyatu dengan tema index.html) */
+    .materi-hero {
+      position: relative;
+      padding: 140px 20px 60px 20px;
+      text-align: center;
+    }
+
+    .materi-section {
+      padding: 40px 0 90px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .materi-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .materi-card {
+      padding: 38px 32px;
+      scroll-margin-top: 100px; /* Supaya pas diklik dari navbar nggak ketutup header */
+    }
+
+    .materi-card-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 15px;
+    }
+
+    .materi-card-header i {
+      font-size: 1.8rem;
+    }
+
+    .materi-card-header h3 {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      color: #fff;
+      margin: 0;
+    }
+
+    .materi-card p {
+      color: var(--text-main);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .materi-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+    }
+
+    .materi-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .materi-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--base-red);
+      font-size: 1.5rem;
+      line-height: 1;
+      text-shadow: 0 0 8px var(--neon-red-glow);
+    }
+
+    .prasetya-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--base-red);
+      text-shadow: 0 0 10px var(--neon-red-glow);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .privacy-box {
+      background: rgba(255, 39, 42, 0.08);
+      border: 1px dashed var(--base-red);
+      padding: 20px 24px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      color: var(--text-main);
+    }
+
+    .btn-wa-pelatih {
+      background: #25D366;
+      color: #fff;
+      border: 1px solid #25D366;
+      box-shadow: 0 0 18px rgba(37, 211, 102, 0.5);
+    }
+
+    .btn-wa-pelatih:hover {
+      background: #1ebe5d;
+      box-shadow: 0 0 28px rgba(37, 211, 102, 0.8);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR TETAP SAMA PERSIS DENGAN INDEX.HTML (4 NAVIGASI MATERI + TOMBOL KELUAR) -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="logo.png" alt="Logo Pasker" class="nav-icon" onerror="this.style.display='none'">
+        <span class="brand-text">Pasker <span class="neon-red-text">Smekindo</span></span>
+      </a>
+
+      <button class="mobile-toggle" id="mobile-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#sejarah" class="nav-item active">Sejarah</a>
+        <a href="#panca-prasetya" class="nav-item">Panca Prasetya</a>
+        <a href="#tingkatan-sabuk" class="nav-item">Tingkatan Sabuk</a>
+        <a href="#materi-dasar" class="nav-item">Materi Dasar</a>
+        <div class="nav-auth-buttons">
+          <a href="index.html" class="btn-nav-join"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO HEADER MATERI -->
+  <section class="materi-hero">
+    <div class="hero-glow-bg"></div>
+    <div class="hero-content" style="margin: 0 auto;">
+      <h1 class="hero-title" style="font-size: 2.8rem;">Materi <span class="neon-blue-text">Anggota</span></h1>
+      <p class="hero-subtitle">Portal Khusus Siswa & Warga Pasker Smekindo Cabang Blitar Ranting Doko</p>
+    </div>
+  </section>
+
+  <!-- KONTEN UTAMA (DENGAN EFEK SCROLL REVEAL & INTERACTIVE CARD) -->
+  <section class="materi-section">
+    <div class="container">
+      <div class="materi-grid">
+
+        <!-- 1. SEJARAH IKS DIBENTUK -->
+        <div id="sejarah" class="card interactive-card materi-card">
+          <div class="materi-card-header">
+            <i class="fa-solid fa-landmark icon-blue"></i>
+            <h3>Sejarah IKS Dibentuk</h3>
+          </div>
+          <p><strong>IKSPI Kera Sakti (Ikatan Keluarga Silat Putra Indonesia Kera Sakti)</strong> didirikan pada 15 Januari 1980 di Madiun, Jawa Timur, oleh Raden Totong Kiemdarto.</p>
+          <ul class="materi-list">
+            <li><strong>Lokasi Awal:</strong> Berdiri di Jl. Merpati No. 45, Kelurahan Nambangan Lor, Kecamatan Mangunharjo, Madiun.</li>
+          </ul>
+        </div>
+
+        <!-- 2. PANCA PRASETYA -->
+        <div id="panca-prasetya" class="card interactive-card materi-card">
+          <div class="materi-card-header">
+            <i class="fa-solid fa-scroll icon-red"></i>
+            <h3>Panca Prasetya</h3>
+          </div>
+          <div class="prasetya-title">PANCA PRASETIA</div>
+          <p>Kami siswa siswi IKS.PI Kera Sakti berjanji :</p>
+          <ul class="materi-list">
+            <li>1. SETIA KEPADA PANCASILA DAN UNDANG UNDANG DASAR 1945</li>
+            <li>2. MENJUNJUNG TINGGI SERTA MENJAGA NAMA BAIK PERGURUAN DI DALAM MAUPUN DI LUAR LATIHAN</li>
+            <li>3. HORMAT DAN PATUH KEPADA GURU SERTA MENJALIN RASA PERSAUDARAAN SESAMA SAUDARA SEPERGURUAN</li>
+            <li>4. AKAN SELALU BERTINDAK JUJUR, DISIPLIN DAN PENUH TANGGUNG JAWAB</li>
+            <li>5. SANGGUP DENGAN PENUH KESADARAN MENJALANKAN SEMUA PERATURAN YANG BERLAKU DALAM PERGURUAN</li>
+          </ul>
+        </div>
+
+        <!-- 3. TINGKATAN SABUK -->
+        <div id="tingkatan-sabuk" class="card interactive-card materi-card">
+          <div class="materi-card-header">
+            <i class="fa-solid fa-award icon-blue"></i>
+            <h3>Tingkatan Sabuk</h3>
+          </div>
+          <ul class="materi-list">
+            <li><strong>Sabuk Biru</strong> (Warga Tingkat I)</li>
+            <li><strong>Sabuk Merah</strong> (Tingkat II / Pendekar)</li>
+            <li><strong>Sabuk Merah Setrip Emas</strong> (Tingkat III / Dewan Guru)</li>
+          </ul>
+        </div>
+
+        <!-- 4. MATERI DASAR -->
+        <div id="materi-dasar" class="card interactive-card materi-card">
+          <div class="materi-card-header">
+            <i class="fa-solid fa-shield-halved icon-red"></i>
+            <h3>Materi Dasar</h3>
+          </div>
+          <div class="privacy-box">
+            <p style="margin-bottom: 0;">Materi dasar ikspi kera sakti memiliki privasi yang tidak bisa di umbar dan sembarangan dijelaskan di sosial media, tanya ke pelatih langsung untuk mendapatkan materi dasar.</p>
+          </div>
+          <a href="https://wa.me/6285804304958?text=mas%20izin%20bertanya" target="_blank" class="btn btn-wa-pelatih">
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i> Tanya Pelatih
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER SAMA DENGAN INDEX.HTML -->
+  <footer class="footer-section">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 Pasker Smekindo - Cabang Blitar Ranting Doko. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MENGHUBUNGKAN SCRIPT.JS AGAR ANIMASI SCROLL & KURSOR NEON JALAN -->
+  <script src="script.js"></script>
+
+</body>
+</html>
