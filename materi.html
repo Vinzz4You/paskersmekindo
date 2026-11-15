@@ -4,18 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Materi Anggota - Pasker Smekindo Blitar Doko</title>
+  
+  <!-- Google Fonts & FontAwesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Style Utama -->
   <link rel="stylesheet" href="style.css">
+  
   <style>
     .welcome-section {
-      min-height: 80vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 120px 20px 60px 20px;
       position: relative;
     }
+
     .welcome-card {
       max-width: 900px;
       width: 100%;
@@ -23,51 +29,92 @@
       text-align: center;
       background: var(--bg-card);
       border: 1.5px solid rgba(17, 17, 132, 0.4);
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(17, 17, 132, 0.25);
+      border-radius: 14px;
+      box-shadow: 0 0 35px rgba(17, 17, 132, 0.3), 0 0 15px rgba(255, 39, 42, 0.15);
       position: relative;
       z-index: 2;
     }
+
     .welcome-card h2 {
       font-family: var(--font-heading);
-      font-size: 2rem;
+      font-size: 2.1rem;
       color: #fff;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
+
+    /* Styling Teks Sambutan Efek Ngetik */
     .welcome-card p {
       color: var(--text-muted);
-      font-size: 1.05rem;
-      margin-bottom: 40px;
+      font-size: 1.1rem;
+      margin-bottom: 45px;
+      min-height: 30px; /* Menjaga tata letak stabil saat teks diketik */
     }
+
     .materi-menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
+
+    /* Tombol Navigasi Materi yang Lebih Menarik & Interaktif */
     .materi-nav-btn {
-      background: rgba(4, 6, 15, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 22px 20px;
-      border-radius: 10px;
+      background: linear-gradient(145deg, #090d1f, #0d1230);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      padding: 28px 20px;
+      border-radius: 12px;
       text-decoration: none;
       color: #fff;
       font-family: var(--font-heading);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.05rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
-      transition: all 0.3s ease;
+      gap: 15px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .materi-nav-btn i {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
+      transition: transform 0.35s ease;
     }
+
+    /* Efek Hover Keren pada Tombol */
     .materi-nav-btn:hover {
       background: var(--bg-card-hover);
       border-color: #4a4aff;
-      box-shadow: 0 0 20px var(--neon-blue-glow);
-      transform: translateY(-4px);
+      box-shadow: 0 0 25px var(--neon-blue-glow), inset 0 0 15px rgba(34, 34, 255, 0.15);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .materi-nav-btn:hover i {
+      transform: scale(1.15) translateY(-3px);
+    }
+
+    /* Efek Garis Neon di Bawah Tombol saat di-hover */
+    .materi-nav-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--base-blue), var(--base-red));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .materi-nav-btn:hover::after {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .welcome-card { padding: 35px 20px; }
+      .welcome-card h2 { font-size: 1.6rem; }
+      .welcome-card p { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -88,11 +135,12 @@
 
   <div class="hero-glow-bg"></div>
 
-  <!-- KONTEN UTAMA SAMBUTAN & 4 NAVIGASI HALAMAN -->
+  <!-- KONTEN UTAMA -->
   <section class="welcome-section">
     <div class="welcome-card card interactive-card">
       <h2>Selamat Datang di Pasker Smekindo</h2>
-      <p>Disini ada beberapa materi dasar yang dapat kalian pelajari.</p>
+      <!-- Target untuk teks efek ngetik -->
+      <p id="typing-welcome-text"></p>
       
       <div class="materi-menu-grid">
         <a href="sejarahiks.html" class="materi-nav-btn">
@@ -115,6 +163,25 @@
     </div>
   </section>
 
+  <!-- Script untuk Efek Ngetik & Kursor Neon -->
   <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const textElement = document.getElementById('typing-welcome-text');
+      const message = "Disini ada beberapa materi dasar yang dapat kalian pelajari.";
+      let charIndex = 0;
+
+      function typeWriterWelcome() {
+        if (charIndex < message.length) {
+          textElement.textContent += message.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeWriterWelcome, 45); // Kecepatan ngetik (45ms per huruf)
+        }
+      }
+
+      // Mulai efek ngetik setelah jeda 400ms
+      setTimeout(typeWriterWelcome, 400);
+    });
+  </script>
 </body>
 </html>
