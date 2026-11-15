@@ -38,11 +38,43 @@ export default async function handler(req, res) {
       });
     }
 
-    const email = `${cleanUsername}@anggota.local`;
+    // Cari akun berdasarkan username
+    const { data: member, error: memberError } =
+      await adminSupabase
+        .from("members")
+        .select("auth_user_id, full_name, username, role, is_active")
+        .eq("username", cleanUsername)
+        .single();
 
+    if (
+      memberError ||
+      !member ||
+      !member.is_active ||
+      !["admin", "member"].includes(member.role)
+    ) {
+      return res.status(401).json({
+        success: false,
+        message: "Username atau password salah"
+      });
+    }
+
+    // Ambil email asli dari akun Supabase Auth
+    const { data: userData, error: userError } =
+      await adminSupabase.auth.admin.getUserById(
+        member.auth_user_id
+      );
+
+    if (userError || !userData.user?.email) {
+      return res.status(401).json({
+        success: false,
+        message: "Akun tidak ditemukan"
+      });
+    }
+
+    // Login menggunakan email asli
     const { data, error } =
       await supabase.auth.signInWithPassword({
-        email,
+        email: userData.user.email,
         password
       });
 
@@ -53,31 +85,16 @@ export default async function handler(req, res) {
       });
     }
 
-    // Periksa data anggota
-    const { data: member, error: memberError } =
-      await adminSupabase
-        .from("members")
-        .select("full_name, username, role, is_active")
-        .eq("auth_user_id", data.user.id)
-        .single();
-
-    if (
-      memberError ||
-      !member ||
-      !member.is_active ||
-      !["admin", "member"].includes(member.role)
-    ) {
-      return res.status(403).json({
-        success: false,
-        message: "Akun tidak aktif atau tidak memiliki akses"
-      });
-    }
-
     return res.status(200).json({
       success: true,
       message: "Login berhasil",
       user: data.user,
-      member,
+      member: {
+        full_name: member.full_name,
+        username: member.username,
+        role: member.role,
+        is_active: member.is_active
+      },
       session: data.session
     });
 
