@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Pasker Smekindo</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #050814;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
+
+    header {
+      padding: 20px 6%;
+      background: #090d1f;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header strong {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .logout {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 7px;
+      background: #d9272e;
+      color: white;
+      cursor: pointer;
+    }
+
+    main {
+      width: 90%;
+      max-width: 850px;
+      margin: 45px auto;
+    }
+
+    .welcome {
+      margin-bottom: 30px;
+    }
+
+    .welcome p {
+      color: #aab2c5;
+    }
+
+    .panel {
+      background: linear-gradient(145deg, #090d1f, #10172d);
+      border: 1px solid rgba(74,74,255,0.3);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(17,17,132,0.15);
+    }
+
+    .panel h2 {
+      font-family: 'Poppins', sans-serif;
+      margin-top: 0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      background: #050814;
+      border: 1px solid #303954;
+      border-radius: 7px;
+      color: white;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #4a4aff;
+    }
+
+    .create-btn {
+      width: 100%;
+      padding: 14px;
+      background: #d9272e;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .create-btn:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #message {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .note {
+      color: #aab2c5;
+      font-size: 13px;
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <strong><i class="fa-solid fa-shield-halved"></i> PASKER ADMIN</strong>
+  <button class="logout" onclick="logout()">
+    <i class="fa-solid fa-right-from-bracket"></i> Keluar
+  </button>
+</header>
+
+<main>
+
+  <div class="welcome">
+    <h1>Panel Administrator</h1>
+    <p>Selamat datang di pengelolaan anggota Pasker Smekindo.</p>
+  </div>
+
+  <section class="panel">
+
+    <h2><i class="fa-solid fa-user-plus"></i> Tambah Anggota</h2>
+
+    <p style="color:#aab2c5; font-size:14px; margin-bottom:25px;">
+      Buat akun baru untuk anggota organisasi.
+    </p>
+
+    <form id="memberForm">
+
+      <div class="form-group">
+        <label for="full_name">Nama Lengkap</label>
+        <input
+          type="text"
+          id="full_name"
+          placeholder="Masukkan nama lengkap"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Buat username anggota"
+          minlength="3"
+          maxlength="30"
+          pattern="[a-zA-Z0-9._-]+"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Buat password minimal 8 karakter"
+          minlength="8"
+          required
+        >
+      </div>
+
+      <button type="submit" class="create-btn" id="createButton">
+        <i class="fa-solid fa-user-plus"></i>
+        Buat Akun Anggota
+      </button>
+
+      <div id="message" role="status" aria-live="polite"></div>
+
+    </form>
+
+    <div class="note">
+      <i class="fa-solid fa-circle-info"></i>
+      Akun yang dibuat melalui halaman ini otomatis mendapatkan role Member.
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  const token = sessionStorage.getItem("access_token");
+
+  if (!token) {
+    window.location.replace("/login.html");
+  } else {
+    checkAdmin();
+  }
+
+  async function checkAdmin() {
+    try {
+      const response = await fetch("/api/me", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success ||
+          result.member.role !== "admin") {
+        logout();
+      }
+
+    } catch (error) {
+      logout();
+    }
+  }
+
+  const form = document.getElementById("memberForm");
+  const message = document.getElementById("message");
+  const button = document.getElementById("createButton");
+
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    button.disabled = true;
+    message.textContent = "Sedang membuat akun...";
+
+    try {
+      const response = await fetch("/api/members", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          full_name: document.getElementById("full_name").value.trim(),
+          username: document.getElementById("username").value.trim(),
+          password: document.getElementById("password").value
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Gagal membuat akun");
+      }
+
+      message.textContent = "Akun anggota berhasil dibuat!";
+
+      form.reset();
+
+    } catch (error) {
+      message.textContent = error.message;
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  function logout() {
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("user");
+    window.location.replace("/login.html");
+  }
+</script>
+
+</body>
+</html>
