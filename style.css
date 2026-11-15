@@ -663,3 +663,44 @@ body {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
+
+/* --- TOMBOL LOGIN DI NAVBAR --- */
+.nav-auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-nav-login {
+  background: var(--base-blue);
+  color: #fff;
+  padding: 9px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1.5px solid #3333ff;
+  box-shadow: 0 0 12px rgba(17, 17, 132, 0.6);
+  transition: all 0.3s ease;
+}
+
+.btn-nav-login:hover {
+  background: #1b1bc4;
+  box-shadow: 0 0 22px var(--neon-blue-glow);
+  transform: translateY(-2px);
+}
+
+/* Responsif untuk menu HP */
+@media (max-width: 768px) {
+  .nav-auth-buttons {
+    flex-direction: column;
+    width: 80%;
+    gap: 12px;
+  }
+
+  .btn-nav-login, .btn-nav-join {
+    width: 100%;
+    text-align: center;
+  }
+}
