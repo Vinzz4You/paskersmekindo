@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Pasker Smekindo Blitar Doko</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Menggunakan style.css yang sama agar tema menyatu -->
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Styling Tambahan Khusus Halaman Login */
+    .login-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 40px 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 30px;
+      position: relative;
+      z-index: 2;
+      border: 1.5px solid rgba(17, 17, 132, 0.4);
+      background: linear-gradient(145deg, #090d1f, #050814);
+      box-shadow: 0 0 30px rgba(17, 17, 132, 0.3), 0 0 15px rgba(255, 39, 42, 0.15);
+      border-radius: 12px;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-header img {
+      width: 60px;
+      height: auto;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 10px var(--neon-blue-glow));
+    }
+
+    .login-header h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .input-icon-wrapper {
+      position: relative;
+    }
+
+    .input-icon-wrapper i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(4, 6, 15, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 15px 12px 45px;
+      border-radius: 8px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #4a4aff;
+      box-shadow: 0 0 12px var(--neon-blue-glow);
+      background: rgba(4, 6, 15, 0.9);
+    }
+
+    .btn-login-submit {
+      width: 100%;
+      margin-top: 10px;
+      padding: 13px;
+      background: var(--base-red);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--neon-red-glow);
+      transition: all 0.3s ease;
+    }
+
+    .btn-login-submit:hover {
+      background: #e01b1e;
+      box-shadow: 0 0 25px var(--neon-red-glow);
+      transform: translateY(-2px);
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.3s ease;
+    }
+
+    .back-home:hover {
+      color: #fff;
+      text-shadow: 0 0 8px var(--neon-blue-glow);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND GLOW EFFECT -->
+  <div class="hero-glow-bg"></div>
+
+  <section class="login-section">
+    <div class="login-card">
+      <div class="login-header">
+        <!-- Logo opsional, pastikan path gambar sesuai dengan index.html -->
+        <img src="logo.png" alt="Logo Pasker" onerror="this.style.display='none'">
+        <h2>Masuk sebagai anggota Pasker Smekindo</h2>
+        <p>Cabang Blitar Ranting Doko</p>
+      </div>
+
+      <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Fitur login akan segera dihubungkan ke database!');">
+        <div class="form-group">
+          <label for="username">Username atau ID Anggota</label>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="username" class="form-control" placeholder="Masukkan username..." required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login-submit">Masuk Sekarang</button>
+      </form>
+
+      <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda Utama</a>
+    </div>
+  </section>
+
+</body>
+</html>
