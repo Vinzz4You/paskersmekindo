@@ -1,19 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Pasker Smekindo Blitar Doko</title>
-  
-  <!-- Google Fonts & FontAwesome -->
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Menggunakan style.css yang sama agar tema menyatu -->
+
   <link rel="stylesheet" href="style.css">
-  
+
   <style>
-    /* Styling Tambahan Khusus Halaman Login */
     .login-section {
       min-height: 100vh;
       display: flex;
@@ -126,6 +125,20 @@
       transform: translateY(-2px);
     }
 
+    .btn-login-submit:disabled {
+      opacity: 0.6;
+      cursor: wait;
+      transform: none;
+    }
+
+    #loginMessage {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.88rem;
+      color: #fff;
+      min-height: 20px;
+    }
+
     .back-home {
       display: block;
       text-align: center;
@@ -142,43 +155,157 @@
     }
   </style>
 </head>
+
 <body>
 
-  <!-- BACKGROUND GLOW EFFECT -->
   <div class="hero-glow-bg"></div>
 
   <section class="login-section">
     <div class="login-card">
+
       <div class="login-header">
-        <!-- Logo opsional, pastikan path gambar sesuai dengan index.html -->
-        <img src="logo.png" alt="Logo Pasker" onerror="this.style.display='none'">
+        <img src="logo.png" alt="Logo Pasker"
+          onerror="this.style.display='none'">
+
         <h2>Masuk sebagai anggota Pasker Smekindo</h2>
         <p>Cabang Blitar Ranting Doko</p>
       </div>
 
-      <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Fitur login akan segera dihubungkan ke database!');">
+      <form id="loginForm">
+
         <div class="form-group">
           <label for="username">Username atau ID Anggota</label>
+
           <div class="input-icon-wrapper">
             <i class="fa-solid fa-user"></i>
-            <input type="text" id="username" class="form-control" placeholder="Masukkan username..." required>
+
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Masukkan username..."
+              autocomplete="username"
+              required
+            >
           </div>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
+
           <div class="input-icon-wrapper">
             <i class="fa-solid fa-lock"></i>
-            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Masukkan password..."
+              autocomplete="current-password"
+              required
+            >
           </div>
         </div>
 
-        <button type="submit" class="btn-login-submit">Masuk Sekarang</button>
+        <button type="submit" class="btn-login-submit">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Masuk Sekarang
+        </button>
+
+        <p id="loginMessage" role="status" aria-live="polite"></p>
+
       </form>
 
-      <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda Utama</a>
+      <a href="index.html" class="back-home">
+        <i class="fa-solid fa-arrow-left"></i>
+        Kembali ke Beranda Utama
+      </a>
+
     </div>
   </section>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("loginMessage");
+    const button = form.querySelector("button");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const username = document
+        .getElementById("username")
+        .value.trim();
+
+      const password = document
+        .getElementById("password")
+        .value;
+
+      button.disabled = true;
+      message.textContent = "Sedang memeriksa akun...";
+
+      try {
+        const loginResponse = await fetch("/api/auth", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password
+          })
+        });
+
+        const loginData = await loginResponse.json();
+
+        if (!loginResponse.ok || !loginData.success) {
+          throw new Error(
+            loginData.message || "Username atau password salah."
+          );
+        }
+
+        const token = loginData.session?.access_token;
+
+        if (!token) {
+          throw new Error("Sesi login tidak ditemukan.");
+        }
+
+        sessionStorage.setItem("access_token", token);
+
+        const profileResponse = await fetch("/api/me", {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        });
+
+        const profileData = await profileResponse.json();
+
+        if (!profileResponse.ok || !profileData.success) {
+          throw new Error(
+            profileData.message || "Gagal memeriksa profil."
+          );
+        }
+
+        const role = profileData.member.role;
+
+        message.textContent = "Login berhasil! Mengalihkan halaman...";
+
+        if (role === "admin") {
+          window.location.replace("/admin.html");
+        } else if (role === "member") {
+          window.location.replace("/materi.html");
+        } else {
+          throw new Error("Role akun tidak dikenali.");
+        }
+
+      } catch (error) {
+        sessionStorage.removeItem("access_token");
+        message.textContent = error.message;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
 
 </body>
 </html>
