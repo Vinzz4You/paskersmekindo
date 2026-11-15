@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panca Prasetya - Pasker Smekindo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-section { min-height: 80vh; padding: 130px 20px 60px 20px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .page-card { max-width: 800px; width: 100%; padding: 40px; background: var(--bg-card); border: 1.5px solid rgba(255, 39, 42, 0.4); border-radius: 12px; position: relative; z-index: 2; }
+    .page-card h2 { font-family: var(--font-heading); font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .page-card p, .page-card li { color: var(--text-main); font-size: 1.05rem; line-height: 1.8; margin-bottom: 12px; }
+    .page-card ul { list-style: none; padding-left: 0; }
+    .page-card ul li { position: relative; padding-left: 24px; margin-bottom: 10px; }
+    .page-card ul li::before { content: "•"; position: absolute; left: 0; color: var(--base-red); font-size: 1.5rem; line-height: 1; }
+    .prasetya-heading { font-family: var(--font-heading); font-weight: 800; color: var(--base-red); text-shadow: 0 0 10px var(--neon-red-glow); letter-spacing: 1px; margin-bottom: 10px; }
+    .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 25px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .btn-back:hover { color: #fff; text-shadow: 0 0 8px var(--neon-blue-glow); }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="materi.html" class="brand-logo"><span class="brand-text">Pasker <span class="neon-red-text">Smekindo</span></span></a>
+      <div class="nav-auth-buttons"><a href="materi.html" class="btn-nav-join">Kembali ke Daftar Materi</a></div>
+    </div>
+  </header>
+
+  <div class="hero-glow-bg"></div>
+
+  <section class="page-section">
+    <div class="page-card card interactive-card">
+      <h2><i class="fa-solid fa-scroll icon-red"></i> Panca Prasetya</h2>
+      <div class="prasetya-heading">PANCA PRASETIA</div>
+      <p>Kami siswa siswi IKS.PI Kera Sakti berjanji :</p>
+      <ul>
+        <li>1. SETIA KEPADA PANCASILA DAN UNDANG UNDANG DASAR 1945</li>
+        <li>2. MENJUNJUNG TINGGI SERTA MENJAGA NAMA BAIK PERGURUAN DI DALAM MAUPUN DI LUAR LATIHAN</li>
+        <li>3. HORMAT DAN PATUH KEPADA GURU SERTA MENJALIN RASA PERSAUDARAAN SESAMA SAUDARA SEPERGURUAN</li>
+        <li>4. AKAN SELALU BERTINDAK JUJUR, DISIPLIN DAN PENUH TANGGUNG JAWAB</li>
+        <li>5. SANGGUP DENGAN PENUH KESADARAN MENJALANKAN SEMUA PERATURAN YANG BERLAKU DALAM PERGURUAN</li>
+      </ul>
+      <a href="materi.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Materi</a>
+    </div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
