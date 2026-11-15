@@ -1,93 +1,173 @@
 
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-const supabaseAuth = createClient(
-  supabaseUrl,
-  supabaseAnonKey
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
 );
 
-const supabaseAdmin = createClient(
-  supabaseUrl,
-  supabaseServiceKey
+const adminSupabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
 export default async function handler(req, res) {
-  if (req.method !== "GET") {
-    return res.status(405).json({
-      success: false,
-      message: "Method not allowed"
-    });
-  }
-
   try {
-    const authHeader = req.headers.authorization;
+    // Hanya GET dan POST yang diizinkan
+    if (!["GET", "POST"].includes(req.method)) {
+      return res.status(405).json({
+        success: false,
+        message: "Method not allowed"
+      });
+    }
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    // Periksa token login
+    const token = req.headers.authorization?.replace("Bearer ", "");
+
+    if (!token) {
       return res.status(401).json({
         success: false,
         message: "Silakan login terlebih dahulu"
       });
     }
 
-    const token = authHeader.split(" ")[1];
+    const { data: authData, error: authError } =
+      await supabase.auth.getUser(token);
 
-    // Validasi token login
-    const { data: userData, error: authError } =
-      await supabaseAuth.auth.getUser(token);
-
-    if (authError || !userData.user) {
+    if (authError || !authData.user) {
       return res.status(401).json({
         success: false,
-        message: "Sesi login tidak valid"
+        message: "Sesi tidak valid"
       });
     }
 
-    // Periksa status dan role anggota
-    const { data: member, error: memberError } =
-      await supabaseAdmin
+    // Periksa apakah pengguna adalah admin aktif
+    const { data: admin, error: adminError } =
+      await adminSupabase
         .from("members")
-        .select("id, full_name, username, role, is_active")
-        .eq("auth_user_id", userData.user.id)
+        .select("role, is_active")
+        .eq("auth_user_id", authData.user.id)
         .single();
 
     if (
-      memberError ||
-      !member ||
-      !member.is_active ||
-      member.role !== "member"
+      adminError ||
+      !admin ||
+      admin.role !== "admin" ||
+      !admin.is_active
     ) {
       return res.status(403).json({
         success: false,
-        message: "Akses khusus anggota aktif"
+        message: "Akses ditolak"
       });
     }
 
-    // Ambil materi setelah akses berhasil diverifikasi
-    const { data: materials, error: materialsError } =
-      await supabaseAdmin
-        .from("materials")
-        .select("*")
-        .order("created_at", { ascending: false });
+    // GET: Ambil daftar anggota
+    if (req.method === "GET") {
+      const { data: members, error } =
+        await adminSupabase
+          .from("members")
+          .select("id, full_name, username, role, is_active")
+          .eq("role", "member")
+          .order("full_name", { ascending: true });
 
-    if (materialsError) {
-      throw materialsError;
+      if (error) {
+        throw error;
+      }
+
+      return res.status(200).json({
+        success: true,
+        members
+      });
     }
 
-    return res.status(200).json({
-      success: true,
-      member: {
-        name: member.full_name,
-        username: member.username
-      },
-      materials
-    });
+    // POST: Tambahkan anggota baru
+    if (req.method === "POST") {
+      const { full_name, username, password } = req.body || {};
+
+      if (
+        typeof full_name !== "string" ||
+        typeof username !== "string" ||
+        typeof password !== "string"
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Data anggota tidak valid"
+        });
+      }
+
+      const cleanName = full_name.trim();
+      const cleanUsername = username.trim().toLowerCase();
+
+      if (!cleanName || cleanName.length > 100) {
+        return res.status(400).json({
+          success: false,
+          message: "Nama wajib diisi dan maksimal 100 karakter"
+        });
+      }
+
+      if (!/^[a-zA-Z0-9._-]{3,30}$/.test(cleanUsername)) {
+        return res.status(400).json({
+          success: false,
+          message: "Format username tidak valid"
+        });
+      }
+
+      if (password.length < 8) {
+        return res.status(400).json({
+          success: false,
+          message: "Password minimal 8 karakter"
+        });
+      }
+
+      const email = `${cleanUsername}@anggota.local`;
+
+      // Buat akun autentikasi
+      const { data: newUser, error: createError } =
+        await adminSupabase.auth.admin.createUser({
+          email,
+          password,
+          email_confirm: true
+        });
+
+      if (createError) {
+        return res.status(400).json({
+          success: false,
+          message: createError.message
+        });
+      }
+
+      // Simpan profil anggota
+      const { error: insertError } =
+        await adminSupabase
+          .from("members")
+          .insert({
+            auth_user_id: newUser.user.id,
+            full_name: cleanName,
+            username: cleanUsername,
+            role: "member",
+            is_active: true
+          });
+
+      // Batalkan pembuatan akun jika penyimpanan profil gagal
+      if (insertError) {
+        await adminSupabase.auth.admin.deleteUser(
+          newUser.user.id
+        );
+
+        return res.status(400).json({
+          success: false,
+          message: insertError.message
+        });
+      }
+
+      return res.status(201).json({
+        success: true,
+        message: "Akun anggota berhasil dibuat"
+      });
+    }
 
   } catch (error) {
-    console.error("Materials API Error:", error);
+    console.error("Members API Error:", error);
 
     return res.status(500).json({
       success: false,
