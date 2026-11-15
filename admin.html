@@ -1,286 +1,485 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel Admin - Pasker Smekindo</title>
+  <title>Admin Dashboard - Pasker Smekindo Blitar Doko</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 
   <style>
-    * {
-      box-sizing: border-box;
+    .admin-dashboard-section {
+      min-height: 90vh;
+      padding: 110px 20px 60px;
+      position: relative;
+      z-index: 2;
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #050814;
-      color: white;
-      font-family: 'Inter', sans-serif;
+    .admin-container {
+      max-width: 1100px;
+      margin: auto;
     }
 
-    header {
-      padding: 20px 6%;
-      background: #090d1f;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+    .admin-topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    header strong {
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .logout {
-      padding: 10px 16px;
-      border: none;
-      border-radius: 7px;
-      background: #d9272e;
-      color: white;
-      cursor: pointer;
-    }
-
-    main {
-      width: 90%;
-      max-width: 850px;
-      margin: 45px auto;
-    }
-
-    .welcome {
+      gap: 15px;
+      flex-wrap: wrap;
+      background: var(--bg-card);
+      padding: 22px 30px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,39,42,.3);
+      box-shadow: 0 0 20px rgba(255,39,42,.15);
       margin-bottom: 30px;
     }
 
-    .welcome p {
-      color: #aab2c5;
+    .admin-welcome h2 {
+      font-family: var(--font-heading);
+      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 4px;
     }
 
-    .panel {
-      background: linear-gradient(145deg, #090d1f, #10172d);
-      border: 1px solid rgba(74,74,255,0.3);
+    .admin-welcome p {
+      color: var(--text-muted);
+      font-size: .9rem;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .admin-card, .full-width-card {
+      background: var(--bg-card);
+      border: 1.5px solid rgba(17,17,132,.4);
       border-radius: 12px;
       padding: 30px;
-      box-shadow: 0 0 20px rgba(17,17,132,0.15);
+      box-shadow: 0 0 25px rgba(17,17,132,.2);
     }
 
-    .panel h2 {
-      font-family: 'Poppins', sans-serif;
-      margin-top: 0;
+    .admin-card h3, .full-width-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding-bottom: 12px;
+    }
+
+    .admin-card h3 i {
+      color: var(--base-red);
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
-    label {
+    .form-group label {
       display: block;
-      margin-bottom: 9px;
-      font-size: 14px;
+      font-size: .88rem;
+      color: var(--text-main);
+      margin-bottom: 6px;
     }
 
-    input {
+    .form-control {
       width: 100%;
-      padding: 13px;
-      background: #050814;
-      border: 1px solid #303954;
-      border-radius: 7px;
-      color: white;
-      outline: none;
+      background: rgba(4,6,15,.8);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: .92rem;
     }
 
-    input:focus {
+    .form-control:focus {
+      outline: none;
       border-color: #4a4aff;
     }
 
-    .create-btn {
+    .btn-admin-submit {
       width: 100%;
-      padding: 14px;
-      background: #d9272e;
-      color: white;
+      padding: 11px;
+      background: var(--base-red);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 600;
       border: none;
-      border-radius: 7px;
-      font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
+      margin-top: 5px;
     }
 
-    .create-btn:disabled {
-      opacity: 0.6;
-      cursor: wait;
+    .btn-admin-submit:disabled {
+      opacity: .6;
+      cursor: not-allowed;
     }
 
-    #message {
-      margin-top: 18px;
-      text-align: center;
-      font-size: 14px;
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
     }
 
-    .note {
-      color: #aab2c5;
-      font-size: 13px;
-      margin-top: 20px;
-      line-height: 1.7;
+    .members-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: .9rem;
+    }
+
+    .members-table th,
+    .members-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .members-table th {
+      color: #fff;
+      background: rgba(17,17,132,.2);
+    }
+
+    .members-table td {
+      color: var(--text-muted);
+    }
+
+    .members-table td strong {
+      color: #fff;
+    }
+
+    .status-message {
+      font-size: .88rem;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <strong><i class="fa-solid fa-shield-halved"></i> PASKER ADMIN</strong>
-  <button class="logout" onclick="logout()">
-    <i class="fa-solid fa-right-from-bracket"></i> Keluar
-  </button>
-</header>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="logo.png" alt="Logo Pasker" class="nav-icon"
+             onerror="this.style.display='none'">
+        <span class="brand-text">
+          Pasker <span class="neon-red-text">Smekindo</span>
+        </span>
+      </a>
 
-<main>
-
-  <div class="welcome">
-    <h1>Panel Administrator</h1>
-    <p>Selamat datang di pengelolaan anggota Pasker Smekindo.</p>
-  </div>
-
-  <section class="panel">
-
-    <h2><i class="fa-solid fa-user-plus"></i> Tambah Anggota</h2>
-
-    <p style="color:#aab2c5; font-size:14px; margin-bottom:25px;">
-      Buat akun baru untuk anggota organisasi.
-    </p>
-
-    <form id="memberForm">
-
-      <div class="form-group">
-        <label for="full_name">Nama Lengkap</label>
-        <input
-          type="text"
-          id="full_name"
-          placeholder="Masukkan nama lengkap"
-          required
-        >
+      <div class="nav-auth-buttons">
+        <button onclick="logoutAdmin()" class="btn-nav-join">
+          <i class="fa-solid fa-right-from-bracket"></i> Keluar
+        </button>
       </div>
-
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          placeholder="Buat username anggota"
-          minlength="3"
-          maxlength="30"
-          pattern="[a-zA-Z0-9._-]+"
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Buat password minimal 8 karakter"
-          minlength="8"
-          required
-        >
-      </div>
-
-      <button type="submit" class="create-btn" id="createButton">
-        <i class="fa-solid fa-user-plus"></i>
-        Buat Akun Anggota
-      </button>
-
-      <div id="message" role="status" aria-live="polite"></div>
-
-    </form>
-
-    <div class="note">
-      <i class="fa-solid fa-circle-info"></i>
-      Akun yang dibuat melalui halaman ini otomatis mendapatkan role Member.
     </div>
+  </header>
 
+  <div class="hero-glow-bg"></div>
+
+  <section class="admin-dashboard-section">
+    <div class="admin-container">
+
+      <div class="admin-topbar">
+        <div class="admin-welcome">
+          <h2>Dashboard Admin Pasker Smekindo</h2>
+          <p id="admin-session-info">Memeriksa sesi admin...</p>
+        </div>
+
+        <a href="materi.html" class="btn btn-neon-blue"
+           style="padding:9px 18px;font-size:.85rem;">
+          Portal Materi
+        </a>
+      </div>
+
+      <div class="admin-grid">
+
+        <div class="admin-card card interactive-card">
+          <h3>
+            <i class="fa-solid fa-user-plus"></i>
+            Tambah Anggota Baru
+          </h3>
+
+          <form id="add-member-form">
+            <div class="form-group">
+              <label for="memberName">Nama Lengkap</label>
+              <input
+                type="text"
+                id="memberName"
+                class="form-control"
+                placeholder="Nama anggota..."
+                maxlength="100"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="memberUsername">Username</label>
+              <input
+                type="text"
+                id="memberUsername"
+                class="form-control"
+                placeholder="Username anggota..."
+                minlength="3"
+                maxlength="30"
+                pattern="[a-zA-Z0-9._-]+"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="memberPassword">Password</label>
+              <input
+                type="password"
+                id="memberPassword"
+                class="form-control"
+                placeholder="Minimal 8 karakter"
+                minlength="8"
+                required
+              >
+            </div>
+
+            <button type="submit" id="submit-member"
+                    class="btn-admin-submit">
+              Simpan Anggota
+            </button>
+
+            <p id="add-member-message" class="status-message"></p>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="full-width-card card interactive-card">
+        <h3>
+          <i class="fa-solid fa-users-rectangle"></i>
+          Daftar Anggota Terdaftar
+        </h3>
+
+        <div class="table-responsive">
+          <table class="members-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Lengkap</th>
+                <th>Username</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="members-table-body">
+              <tr>
+                <td colspan="4" style="text-align:center;">
+                  Memuat data anggota...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p id="members-message" class="status-message"></p>
+      </div>
+
+    </div>
   </section>
 
-</main>
+  <script>
+    const TOKEN_KEY = "access_token";
 
-<script>
-  const token = sessionStorage.getItem("access_token");
+    const token = sessionStorage.getItem(TOKEN_KEY);
 
-  if (!token) {
-    window.location.replace("/login.html");
-  } else {
-    checkAdmin();
-  }
+    function logoutAdmin() {
+      sessionStorage.removeItem(TOKEN_KEY);
+      window.location.href = "login.html";
+    }
 
-  async function checkAdmin() {
-    try {
-      const response = await fetch("/api/me", {
-        headers: {
-          Authorization: `Bearer ${token}`
+    function showLoginError(message) {
+      alert(message);
+      sessionStorage.removeItem(TOKEN_KEY);
+      window.location.href = "login.html";
+    }
+
+    async function verifyAdmin() {
+      if (!token) {
+        showLoginError("Sesi login tidak ditemukan. Silakan login kembali.");
+        return false;
+      }
+
+      try {
+        const response = await fetch("/api/me", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success ||
+            result.member?.role !== "admin") {
+          showLoginError("Akses khusus administrator.");
+          return false;
+        }
+
+        document.getElementById("admin-session-info").textContent =
+          `Selamat datang, ${result.member.full_name}`;
+
+        return true;
+
+      } catch (error) {
+        document.getElementById("admin-session-info").textContent =
+          "Gagal menghubungi server. Periksa koneksi internet.";
+        return false;
+      }
+    }
+
+    async function fetchMembersData() {
+      const tbody = document.getElementById("members-table-body");
+      const message = document.getElementById("members-message");
+
+      tbody.innerHTML = `
+        <tr><td colspan="4" style="text-align:center;">
+          Memuat data anggota...
+        </td></tr>
+      `;
+
+      try {
+        const response = await fetch("/api/members", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || "Gagal mengambil data anggota.");
+        }
+
+        const members = result.members || [];
+
+        if (members.length === 0) {
+          tbody.innerHTML = `
+            <tr><td colspan="4" style="text-align:center;">
+              Belum ada anggota terdaftar.
+            </td></tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = "";
+
+        members.forEach((member, index) => {
+          const tr = document.createElement("tr");
+
+          const values = [
+            index + 1,
+            member.full_name,
+            member.username,
+            member.is_active ? "Aktif" : "Nonaktif"
+          ];
+
+          values.forEach((value, i) => {
+            const td = document.createElement("td");
+            if (i === 1) {
+              const strong = document.createElement("strong");
+              strong.textContent = value ?? "-";
+              td.appendChild(strong);
+            } else {
+              td.textContent = value ?? "-";
+            }
+            tr.appendChild(td);
+          });
+
+          tbody.appendChild(tr);
+        });
+
+        message.textContent = "";
+
+      } catch (error) {
+        tbody.innerHTML = `
+          <tr><td colspan="4" style="text-align:center;">
+            Data anggota gagal dimuat.
+          </td></tr>
+        `;
+        message.textContent = error.message;
+      }
+    }
+
+    document.getElementById("add-member-form")
+      .addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const button = document.getElementById("submit-member");
+        const message = document.getElementById("add-member-message");
+
+        const full_name = document.getElementById("memberName").value.trim();
+        const username = document.getElementById("memberUsername").value.trim();
+        const password = document.getElementById("memberPassword").value;
+
+        button.disabled = true;
+        button.textContent = "Menyimpan...";
+        message.textContent = "";
+
+        try {
+          const response = await fetch("/api/members", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              full_name,
+              username,
+              password
+            })
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.success) {
+            throw new Error(result.message || "Gagal membuat akun anggota.");
+          }
+
+          message.textContent = "Akun anggota berhasil dibuat!";
+          message.style.color = "#4ade80";
+
+          this.reset();
+          await fetchMembersData();
+
+        } catch (error) {
+          message.textContent = error.message;
+          message.style.color = "#ff4545";
+        } finally {
+          button.disabled = false;
+          button.textContent = "Simpan Anggota";
         }
       });
 
-      const result = await response.json();
+    async function initializeDashboard() {
+      const isAdmin = await verifyAdmin();
 
-      if (!response.ok || !result.success ||
-          result.member.role !== "admin") {
-        logout();
+      if (isAdmin) {
+        await fetchMembersData();
       }
-
-    } catch (error) {
-      logout();
     }
-  }
 
-  const form = document.getElementById("memberForm");
-  const message = document.getElementById("message");
-  const button = document.getElementById("createButton");
-
-  form.addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    button.disabled = true;
-    message.textContent = "Sedang membuat akun...";
-
-    try {
-      const response = await fetch("/api/members", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          full_name: document.getElementById("full_name").value.trim(),
-          username: document.getElementById("username").value.trim(),
-          password: document.getElementById("password").value
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || "Gagal membuat akun");
-      }
-
-      message.textContent = "Akun anggota berhasil dibuat!";
-
-      form.reset();
-
-    } catch (error) {
-      message.textContent = error.message;
-    } finally {
-      button.disabled = false;
-    }
-  });
-
-  function logout() {
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("user");
-    window.location.replace("/login.html");
-  }
-</script>
+    initializeDashboard();
+  </script>
 
 </body>
 </html>
