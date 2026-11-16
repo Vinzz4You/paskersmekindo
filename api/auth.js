@@ -22,7 +22,12 @@ export default async function handler(req, res) {
   try {
     const { username, password } = req.body || {};
 
-    if (!username || !password) {
+    if (
+      typeof username !== "string" ||
+      typeof password !== "string" ||
+      !username.trim() ||
+      !password
+    ) {
       return res.status(400).json({
         success: false,
         message: "Username dan password wajib diisi"
@@ -38,36 +43,47 @@ export default async function handler(req, res) {
       });
     }
 
-    // Cari akun berdasarkan username
+    // Cari data anggota berdasarkan username
     const { data: member, error: memberError } =
       await adminSupabase
         .from("members")
-        .select("auth_user_id, full_name, username, role, is_active")
+        .select(
+          "auth_user_id, full_name, username, role, is_active"
+        )
         .eq("username", cleanUsername)
         .single();
 
-    if (
-      memberError ||
-      !member ||
-      !member.is_active ||
-      !["admin", "member"].includes(member.role)
-    ) {
+    if (memberError || !member) {
+      console.error("MEMBER LOOKUP ERROR:", memberError?.message);
+
       return res.status(401).json({
         success: false,
         message: "Username atau password salah"
       });
     }
 
-    // Ambil email asli dari akun Supabase Auth
+    if (
+      !member.is_active ||
+      !["admin", "member"].includes(member.role)
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "Akun tidak aktif atau tidak memiliki akses"
+      });
+    }
+
+    // Ambil email dari akun Auth
     const { data: userData, error: userError } =
       await adminSupabase.auth.admin.getUserById(
         member.auth_user_id
       );
 
     if (userError || !userData.user?.email) {
+      console.error("AUTH USER ERROR:", userError?.message);
+
       return res.status(401).json({
         success: false,
-        message: "Akun tidak ditemukan"
+        message: "Akun autentikasi tidak ditemukan"
       });
     }
 
@@ -79,9 +95,14 @@ export default async function handler(req, res) {
       });
 
     if (error || !data.user || !data.session) {
+      console.error(
+        "SUPABASE LOGIN ERROR:",
+        error?.message
+      );
+
       return res.status(401).json({
         success: false,
-        message: "Username atau password salah"
+        message: "Login gagal. Periksa Runtime Logs Vercel."
       });
     }
 
@@ -99,7 +120,7 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error("Login API Error:", error);
+    console.error("LOGIN SERVER ERROR:", error);
 
     return res.status(500).json({
       success: false,
