@@ -1,45 +1,144 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <link rel="icon" type="png" href="icon.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sejarah IKS - Pasker Smekindo</title>
+  
+  <!-- Google Fonts & FontAwesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Style Utama -->
   <link rel="stylesheet" href="style.css">
+  
   <style>
-    .page-section { min-height: 80vh; padding: 130px 20px 60px 20px; display: flex; align-items: center; justify-content: center; position: relative; }
-    .page-card { max-width: 800px; width: 100%; padding: 40px; background: var(--bg-card); border: 1.5px solid rgba(17, 17, 132, 0.4); border-radius: 12px; position: relative; z-index: 2; }
-    .page-card h2 { font-family: var(--font-heading); font-size: 1.8rem; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-    .page-card p, .page-card li { color: var(--text-main); font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px; }
-    .page-card ul { list-style: none; padding-left: 0; }
-    .page-card ul li { position: relative; padding-left: 24px; }
-    .page-card ul li::before { content: "•"; position: absolute; left: 0; color: var(--base-red); font-size: 1.5rem; line-height: 1; }
-    .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 25px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
-    .btn-back:hover { color: #fff; text-shadow: 0 0 8px var(--neon-blue-glow); }
+    .page-section {
+      min-height: 80vh;
+      padding: 130px 20px 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .page-card {
+      max-width: 850px;
+      width: 100%;
+      padding: 45px 40px;
+      background: var(--bg-card);
+      border: 1.5px solid rgba(17, 17, 132, 0.4);
+      border-radius: 12px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 30px rgba(17, 17, 132, 0.25);
+    }
+
+    .page-card h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-card p {
+      color: var(--text-main);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .sub-heading {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: #fff;
+      margin: 25px 0 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 8px;
+    }
+
+    .page-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 25px;
+    }
+
+    .page-card ul li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .page-card ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--base-red);
+      font-size: 1.5rem;
+      line-height: 1;
+      text-shadow: 0 0 8px var(--neon-red-glow);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .btn-back:hover {
+      color: #fff;
+      text-shadow: 0 0 8px var(--neon-blue-glow);
+    }
   </style>
 </head>
 <body>
+
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="materi.html" class="brand-logo"><span class="brand-text">Pasker <span class="neon-red-text">Smekindo</span></span></a>
-      <div class="nav-auth-buttons"><a href="materi.html" class="btn-nav-join">Kembali ke Daftar Materi</a></div>
+      <a href="materi.html" class="brand-logo">
+        <span class="brand-text">Pasker <span class="neon-red-text">Smekindo</span></span>
+      </a>
+      <div class="nav-auth-buttons">
+        <a href="materi.html" class="btn-nav-join">Kembali ke Daftar Materi</a>
+      </div>
     </div>
   </header>
 
   <div class="hero-glow-bg"></div>
 
+  <!-- KONTEN UTAMA SEJARAH -->
   <section class="page-section">
     <div class="page-card card interactive-card">
       <h2><i class="fa-solid fa-landmark icon-blue"></i> Sejarah IKS Dibentuk</h2>
-      <p>IKSPI Kera Sakti (Ikatan Keluarga Silat Putra Indonesia Kera Sakti) didirikan pada 15 Januari 1980 di Madiun, Jawa Timur, oleh Raden Totong Kiemdarto.</p>
+      
+      <p>IKS.PI Kera Sakti (Ikatan Keluarga Silat Putra Indonesia Kera Sakti) didirikan pada 15 Januari 1980 di Madiun, Jawa Timur, oleh Raden Totong Kiemdarto.</p>
+      
+      <div class="sub-heading">Fakta Utama Pembentukan</div>
+      
       <ul>
-        <li><strong>Lokasi Awal:</strong> Berdiri di Jl. Merpati No. 45, Kelurahan Nambangan Lor, Kecamatan Mangunharjo, Madiun.</li>
+        <li><strong>Waktu & Tempat:</strong> Berdiri pada 15 Januari 1980 di Jl. Merpati No. 45, Kelurahan Nambangan Lor, Kecamatan Mangunharjo, Madiun.</li>
+        <li><strong>Pendiri:</strong> Raden Totong Kiemdarto (lahir 20 Oktober 1953, wafat 24 Desember 1997) sebagai Guru Besar sekaligus penggagas perguruan.</li>
+        <li><strong>Nama & Perkembangan:</strong> Awalnya dikenal sebagai IKS Putra Indonesia (IKS.PI), lalu berkembang dikenal luas masyarakat sebagai IKS.PI Kera Sakti.</li>
+        <li><strong>Keilmuan:</strong> Memadukan pencak silat dan kungfu aliran utara serta selatan (Nan Pie Ho Jien, gabungan teknik tinju selatan dan tendangan utara), dilengkapi aspek kerohanian.</li>
+        <li><strong>Pengakuan Organisasi:</strong> Tercatat resmi sebagai anggota Ikatan Pencak Silat Indonesia (IPSI) pada 30 Maret 1987.</li>
       </ul>
+
       <a href="materi.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Materi</a>
     </div>
   </section>
+
+  <!-- Script Utama -->
   <script src="script.js"></script>
 </body>
 </html>
