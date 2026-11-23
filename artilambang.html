@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <link rel="icon" type="png" href="icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arti Lambang - Pasker Smekindo Blitar Doko</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Style Utama -->
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    .materi-detail-section {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 60px 20px;
+      position: relative;
+    }
+
+    .detail-card {
+      max-width: 850px;
+      width: 100%;
+      padding: 45px 40px;
+      background: var(--bg-card);
+      border: 1.5px solid rgba(17, 17, 132, 0.4);
+      border-radius: 14px;
+      box-shadow: 0 0 35px rgba(17, 17, 132, 0.3), 0 0 15px rgba(255, 39, 42, 0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    .detail-header {
+      text-align: center;
+      margin-bottom: 35px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 25px;
+    }
+
+    .lambang-hero-img {
+      width: 170px;
+      max-width: 55%;
+      height: auto;
+      margin: 0 auto 20px auto;
+      display: block;
+      filter: drop-shadow(0 0 18px rgba(34, 34, 255, 0.45)) drop-shadow(0 0 10px rgba(255, 39, 42, 0.25));
+    }
+
+    .detail-header h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 6px;
+      text-shadow: 0 0 12px rgba(34, 34, 255, 0.5);
+    }
+
+    .lambang-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .lambang-item {
+      background: linear-gradient(145deg, #090d1f, #0d1230);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 4px solid var(--base-blue);
+      padding: 20px 24px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .lambang-item:nth-child(even) {
+      border-left-color: var(--base-red);
+    }
+
+    .lambang-item:hover {
+      transform: translateX(6px);
+      box-shadow: 0 0 20px rgba(34, 34, 255, 0.2);
+    }
+
+    .lambang-item h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .lambang-item p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .lambang-link {
+      color: #6d8bff;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .lambang-link:hover {
+      color: #ff5c5f;
+    }
+
+    .back-btn-wrapper {
+      margin-top: 35px;
+      text-align: center;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(90deg, var(--base-blue), #1e1eb8);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+      box-shadow: 0 0 20px var(--neon-blue-glow);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .detail-card { padding: 30px 20px; }
+      .detail-header h2 { font-size: 1.55rem; }
+      .lambang-hero-img { width: 135px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="logo.png" alt="Logo Pasker" class="nav-icon" onerror="this.style.display='none'">
+        <span class="brand-text">Pasker <span class="neon-red-text">Smekindo</span></span>
+      </a>
+      <div class="nav-auth-buttons">
+        <button onclick="logoutMember()" class="btn-nav-join">
+          <i class="fa-solid fa-right-from-bracket"></i> Keluar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero-glow-bg"></div>
+
+  <!-- KONTEN UTAMA -->
+  <section class="materi-detail-section">
+    <div class="detail-card card interactive-card">
+      <div class="detail-header">
+        <img src="icon.png" alt="Lambang IKSPI" class="lambang-hero-img">
+        <h2>Arti Lambang</h2>
+      </div>
+
+      <div class="lambang-list">
+        <div class="lambang-item">
+          <h3>Manusia berbayang kera</h3>
+          <p>kita menirukan gerakannya bukan sifatnya</p>
+        </div>
+
+        <div class="lambang-item">
+          <h3>Ekor menjulang ke atas</h3>
+          <p>mengingatkan kita kepada Tuhan yang maha Esa</p>
+        </div>
+
+        <div class="lambang-item">
+          <h3>Perisai</h3>
+          <p>IKS dibentuk untuk melindungi dan tidak digunakan untuk semena mena</p>
+        </div>
+
+        <div class="lambang-item">
+          <h3>Huruf Q</h3>
+          <p>Qontak kita kepada Tuhan yang maha Esa</p>
+        </div>
+
+        <div class="lambang-item">
+          <h3>Huruf P / Putra</h3>
+          <p>karena di IKS semuanya sama rata tidak memandang putra ataupun putri</p>
+        </div>
+
+        <div class="lambang-item">
+          <h3>3 lonjakan</h3>
+          <p><a href="tingkatansabuk.html" class="lambang-link">klik disini untuk melihat nya</a></p>
+        </div>
+      </div>
+
+      <div class="back-btn-wrapper">
+        <a href="materi.html" class="btn-back">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Materi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script>
+    const TOKEN_KEY = "access_token";
+
+    function logoutMember() {
+      sessionStorage.removeItem(TOKEN_KEY);
+      window.location.replace("login.html");
+    }
+
+    async function verifyMemberSession() {
+      const token = sessionStorage.getItem(TOKEN_KEY);
+      if (!token) {
+        window.location.replace("login.html");
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/me", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const result = await response.json();
+
+        if (!response.ok || !result.success || !["member", "admin"].includes(result.member?.role) || !result.member.is_active) {
+          logoutMember();
+        }
+      } catch (error) {
+        console.error("Gagal memeriksa sesi:", error);
+      }
+    }
+
+    verifyMemberSession();
+  </script>
+</body>
+</html>
