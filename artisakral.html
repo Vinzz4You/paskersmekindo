@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <link rel="icon" type="png" href="icon.png">
+  <link rel="icon" type="png" href="icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arti Sakral IKSPI - Pasker Smekindo Blitar Doko</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Style Utama -->
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    .materi-detail-section {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 60px 20px;
+      position: relative;
+    }
+
+    .detail-card {
+      max-width: 850px;
+      width: 100%;
+      padding: 45px 40px;
+      background: var(--bg-card);
+      border: 1.5px solid rgba(17, 17, 132, 0.4);
+      border-radius: 14px;
+      box-shadow: 0 0 35px rgba(17, 17, 132, 0.3), 0 0 15px rgba(255, 39, 42, 0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    .detail-header {
+      text-align: center;
+      margin-bottom: 35px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 20px;
+    }
+
+    .detail-header h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 8px;
+      text-shadow: 0 0 12px rgba(34, 34, 255, 0.5);
+    }
+
+    .detail-header p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    .sakral-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sakral-item {
+      background: linear-gradient(145deg, #090d1f, #0d1230);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 4px solid var(--base-blue);
+      padding: 22px 25px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .sakral-item:nth-child(even) {
+      border-left-color: var(--base-red);
+    }
+
+    .sakral-item:hover {
+      transform: translateX(6px);
+      box-shadow: 0 0 20px rgba(34, 34, 255, 0.2);
+    }
+
+    .sakral-item h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sakral-item p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .back-btn-wrapper {
+      margin-top: 35px;
+      text-align: center;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(90deg, var(--base-blue), #1e1eb8);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+      box-shadow: 0 0 20px var(--neon-blue-glow);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .detail-card { padding: 30px 20px; }
+      .detail-header h2 { font-size: 1.55rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="logo.png" alt="Logo Pasker" class="nav-icon" onerror="this.style.display='none'">
+        <span class="brand-text">Pasker <span class="neon-red-text">Smekindo</span></span>
+      </a>
+      <div class="nav-auth-buttons">
+        <button onclick="logoutMember()" class="btn-nav-join">
+          <i class="fa-solid fa-right-from-bracket"></i> Keluar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero-glow-bg"></div>
+
+  <!-- KONTEN UTAMA -->
+  <section class="materi-detail-section">
+    <div class="detail-card card interactive-card">
+      <div class="detail-header">
+        <h2>Arti Sakral IKSPI Kera Sakti</h2>
+        <p>Filosofi dan makna di balik seragam kebesaran warga IKSPI Kera Sakti</p>
+      </div>
+
+      <div class="sakral-list">
+        <div class="sakral-item">
+          <h3><i class="fa-solid fa-layer-group icon-blue"></i> 2 Tingkatan di Lengan</h3>
+          <p>Diatas langit masih ada langit.</p>
+        </div>
+
+        <div class="sakral-item">
+          <h3><i class="fa-solid fa-infinity icon-red"></i> Bagian Baju Warna Hitam</h3>
+          <p>Kekeluargaan yang tidak akan terputus.</p>
+        </div>
+
+        <div class="sakral-item">
+          <h3><i class="fa-solid fa-yin-yang icon-blue"></i> Kerutan pada Celana Paling Bawah</h3>
+          <p>Ciri khas kungfu.</p>
+        </div>
+      </div>
+
+      <div class="back-btn-wrapper">
+        <a href="materi.html" class="btn-back">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Materi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script>
+    const TOKEN_KEY = "access_token";
+
+    function logoutMember() {
+      sessionStorage.removeItem(TOKEN_KEY);
+      window.location.replace("login.html");
+    }
+
+    async function verifyMemberSession() {
+      const token = sessionStorage.getItem(TOKEN_KEY);
+      if (!token) {
+        window.location.replace("login.html");
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/me", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const result = await response.json();
+
+        if (!response.ok || !result.success || !["member", "admin"].includes(result.member?.role) || !result.member.is_active) {
+          logoutMember();
+        }
+      } catch (error) {
+        console.error("Gagal memeriksa sesi:", error);
+      }
+    }
+
+    verifyMemberSession();
+  </script>
+</body>
+</html>
