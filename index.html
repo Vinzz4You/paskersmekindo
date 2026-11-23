@@ -107,8 +107,47 @@
     </div>
   </section>
 
-  <!-- ARSIP SECTION -->
+<!-- ARSIP SECTION -->
   <section id="arsip" class="section-padding bg-darker">
+    <style>
+      .gallery-footer {
+        margin-top: 2.5rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .btn-lihat-lainnya {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #00d2ff; /* Sesuaikan dengan kode warna neon-blue-text Anda */
+        background: transparent;
+        border: 2px solid #00d2ff;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+      }
+
+      .btn-lihat-lainnya:hover {
+        background: #00d2ff;
+        color: #0a0a0f;
+        box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+        transform: translateY(-2px);
+      }
+
+      .btn-lihat-lainnya i {
+        transition: transform 0.3s ease;
+      }
+
+      .btn-lihat-lainnya:hover i {
+        transform: translateX(4px);
+      }
+    </style>
+
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Arsip <span class="neon-blue-text">Galeri</span></h2>
@@ -153,41 +192,17 @@
           <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- JADWAL SECTION -->
-  <section id="jadwal" class="section-padding">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Jadwal <span class="neon-red-text">Latihan</span></h2>
-        <div class="line-glow"></div>
-      </div>
-
-      <div class="schedule-grid">
-        <!-- Kolom Cyber Blue Neon -->
-        <div class="schedule-card cyber-blue-neon interactive-card">
-          <div class="schedule-day">Rabu</div>
-          <div class="schedule-time"><i class="fa-regular fa-clock"></i> 15:00 WIB</div>
-          <a href="https://maps.app.goo.gl/MzjXofa4p7YXkA8E7" target="_blank" rel="noopener noreferrer" class="schedule-location">
-            <i class="fa-solid fa-location-dot icon-blue"></i>
-            <span>SMKN 1 DOKO</span>
-          </a>
-        </div>
-
-        <!-- Kolom Cyber Red Neon -->
-        <div class="schedule-card cyber-red-neon interactive-card">
-          <div class="schedule-day">Minggu</div>
-          <div class="schedule-time"><i class="fa-regular fa-clock"></i> 14:00 WIB</div>
-          <a href="https://maps.app.goo.gl/MzjXofa4p7YXkA8E7" target="_blank" rel="noopener noreferrer" class="schedule-location">
-            <i class="fa-solid fa-location-dot icon-red"></i>
-            <span>SMKN 1 DOKO</span>
-          </a>
-        </div>
+      <!-- TOMBOL LIHAT LAINNYA -->
+      <div class="gallery-footer">
+        <a href="arsip.html" class="btn-lihat-lainnya">
+          <span>Lihat Lainnya</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
       </div>
     </div>
   </section>
-
+  
   <!-- FOOTER / KONTAK SECTION -->
   <footer id="kontak" class="footer-section">
     <div class="container footer-content">
