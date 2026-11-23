@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <link rel="icon" type="png" href="icon.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arsip - Pasker Smekindo Blitar Doko</title>
@@ -73,21 +74,6 @@
       margin-bottom: 30px;
     }
 
-    .arsip-label {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 10px 14px;
-      background: linear-gradient(transparent, rgba(4, 6, 15, 0.92));
-      color: #fff;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-      z-index: 2;
-    }
-
     /* Lightbox Preview Modal */
     .lightbox-modal {
       position: fixed;
@@ -122,13 +108,6 @@
       max-height: 75vh;
       object-fit: contain;
       border-radius: 8px;
-    }
-
-    .lightbox-caption {
-      margin-top: 12px;
-      font-family: var(--font-heading);
-      color: #fff;
-      font-size: 1rem;
     }
 
     .lightbox-close {
@@ -207,7 +186,7 @@
       <div class="section-header" style="margin-bottom: 25px;">
         <div class="arsip-count-badge">
           <i class="fa-solid fa-images icon-blue"></i>
-          <span>Setiap momen terukir, abadi dalam kenangan.</span>
+          <span>Setiap momen, tersimpan selamanya dalam kenangan.</span>
         </div>
         <div class="line-glow"></div>
       </div>
@@ -224,7 +203,6 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
       <img id="lightbox-img" src="" alt="Preview Arsip">
-      <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
   </div>
 
@@ -247,7 +225,7 @@
       const startNum = 11;
       const endNum = 75;
 
-      // Generate item foto11.jpg sampai foto75.jpg
+      // Generate item foto11.jpg sampai foto75.jpg tanpa label teks di foto
       for (let i = startNum; i <= endNum; i++) {
         const fileName = `foto${i}.jpg`;
         const item = document.createElement('div');
@@ -256,17 +234,16 @@
         item.onclick = () => openLightbox(fileName);
 
         item.innerHTML = `
-          <img src="${fileName}" alt="Arsip ${fileName}" loading="lazy" onerror="this.style.opacity='0.25'">
+          <img src="${fileName}" alt="Dokumentasi Pasker Smekindo" loading="lazy" onerror="this.style.opacity='0.25'">
           <div class="gallery-overlay">
             <i class="fa-solid fa-magnifying-glass-plus"></i>
           </div>
-          <div class="arsip-label">${fileName}</div>
         `;
 
         galleryGrid.appendChild(item);
       }
 
-      // Daftarkan elemen galeri yang baru dibuat ke IntersectionObserver bawaan script.js
+      // Daftarkan elemen galeri yang baru dibuat ke IntersectionObserver
       const newRevealItems = galleryGrid.querySelectorAll('.reveal-init');
       if (newRevealItems.length > 0) {
         const observer = new IntersectionObserver((entries) => {
@@ -298,7 +275,7 @@
 
           if (charIdx === phrase.length) {
             isDeleting = true;
-            setTimeout(loopTypeTitle, 1600); // Jeda baca sebelum menghapus
+            setTimeout(loopTypeTitle, 1600);
             return;
           }
           setTimeout(loopTypeTitle, 95);
@@ -308,7 +285,7 @@
 
           if (charIdx === 0) {
             isDeleting = false;
-            setTimeout(loopTypeTitle, 400); // Jeda sebelum mengetik ulang
+            setTimeout(loopTypeTitle, 400);
             return;
           }
           setTimeout(loopTypeTitle, 55);
@@ -321,10 +298,7 @@
     function openLightbox(fileName) {
       const modal = document.getElementById('lightbox-modal');
       const img = document.getElementById('lightbox-img');
-      const caption = document.getElementById('lightbox-caption');
       img.src = fileName;
-      img.alt = `Arsip ${fileName}`;
-      caption.textContent = `Arsip Pasker Smekindo — ${fileName}`;
       modal.classList.add('active');
     }
 
