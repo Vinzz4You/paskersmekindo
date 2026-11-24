@@ -140,5 +140,50 @@
 
   <!-- Script Utama -->
   <script src="script.js"></script>
+<script>
+const TOKEN_KEY = "access_token";
+
+async function initializeMember() {
+  const token = sessionStorage.getItem(TOKEN_KEY);
+
+  if (!token) {
+    window.location.replace("login.html");
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/me", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      sessionStorage.removeItem(TOKEN_KEY);
+      window.location.replace("login.html");
+      return;
+    }
+
+    const member = result.member;
+
+    if (
+      !["member", "admin"].includes(member?.role) ||
+      !member.is_active
+    ) {
+      sessionStorage.removeItem(TOKEN_KEY);
+      window.location.replace("login.html");
+      return;
+    }
+
+  } catch (error) {
+    document.body.innerHTML =
+      "<h2>Gagal memeriksa sesi. Silakan muat ulang halaman.</h2>";
+  }
+}
+
+initializeMember();
+</script>
 </body>
 </html>
